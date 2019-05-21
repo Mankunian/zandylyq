@@ -18,8 +18,8 @@ angular.module("app").controller("mainCtrl", function ($scope, $http) {
     $scope.myFunction = function () {
         console.log($scope.searchByNumber);
         $http({
-            // url: 'http://api.zandylyq.kz/v1/judgment/search-qualif-by-stat/',
-            url: 'http://api.zandylyq.kz ',
+            url: 'http://api.zandylyq.kz/v1/judgment/search-qualif-by-stat/',
+            // url: 'http://api.zandylyq.kz ',
             method: 'POST',
             data: {qualif_name: $scope.searchByNumber}
         }).then(function (data) {
