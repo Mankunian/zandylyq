@@ -40,3 +40,9 @@ body{
     color: gray;
     font-size: 12px;
 }
+
+.form-title{
+    font-size: x-large;
+    color: firebrick;
+    font-weight: 600;
+}
