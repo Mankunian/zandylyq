@@ -52,7 +52,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Zandylyq</a>
+        <a class="navbar-brand" href="#">ZN</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -136,11 +136,10 @@
                             <br>
                             <div ng-if="crimeList">
                                 <p class="subtitle">Выберите наиболее тяжкое преступление</p>
-                                <!--<span style="font-weight: 600">{{crime}}</span>-->
                                 <select class="form-control" data-live-search="true" ng-model="crime"
                                         style="height: 34px; width: 100%">
                                     <option></option>
-                                    <option ng-repeat="crime in crimeList" value="{{crime.id}}">{{crime.id}} - {{crime.name_ru}}</option>
+                                    <option ng-repeat="crime in crimeList" value="{{crime}}">{{crime.id}} - {{crime.name_ru}}</option>
                                 </select>
                             </div>
                         </div>
@@ -152,8 +151,7 @@
                             <select class="form-control" data-live-search="true" ng-model="stage"
                                     style="height: 34px; width: 100%">
                                 <option></option>
-                                <option ng-repeat="stage in crimeStageList" value="{{stage.id}}">{{stage.crimeName}}
-                                </option>
+                                <option ng-repeat="stage in crimeStageList" value="{{stage}}">{{stage.crimeName}}</option>
                             </select>
                         </div>
                     </div>
@@ -177,9 +175,7 @@
     </div>
 </div>
 
-<!--<script src="https://code.jquery.com/jquery-1.12.4.min.js"
-        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
-        crossorigin="anonymous"></script>-->
+
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
