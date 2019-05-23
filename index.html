@@ -113,10 +113,11 @@
                             <p class="subtitle">Укажите полный возраст на момент совершения преступления</p>
                             <input min="0" type="number" class="form-control" ng-model="item.age" required>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3" >
                             <label class="control-label">Пол <span class="required">*</span></label><br>
-                            <input ng-model="item.gender" type="radio" value="1"> Мужской<br>
-                            <input ng-model="item.gender" type="radio" value="2"> Женский<br>
+                            <div ng-repeat="gen in judgment.genders">
+                                <input ng-model="item.gender" type="radio" value={{gen.id}}> {{gen.name_ru}}<br>
+                            </div>
                         </div>
                         <div class="col-sm-6">
                             <label class="control-label">Наличие обстоятельств</label><br>
@@ -151,7 +152,7 @@
                             <select class="form-control" data-live-search="true" ng-model="item.stage"
                                     style="height: 34px; width: 100%">
                                 <option></option>
-                                <option ng-repeat="stage in crimeStageList" value="{{stage.id}}">{{stage.crimeName}}</option>
+                                <option ng-repeat="stage in judgment.article24" value="{{stage.id}}">{{stage.name_ru}}</option>
                             </select>
                         </div>
                     </div>
