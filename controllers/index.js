@@ -8,11 +8,11 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout) 
 
 
     $scope.myFunction = function () {
-        console.log($scope.searchByNumber);
+        console.log($scope.item.searchByNumber);
         $http({
             url: 'http://api.zandylyq.kz/v1/judgment/search-qualif-by-stat/',
             method: 'POST',
-            data: {qualif_name: $scope.searchByNumber}
+            data: {qualif_name: $scope.item.searchByNumber}
         }).then(function (data) {
             angular.forEach(data.data, function (value) {
                 $scope.crimeList = value;
@@ -32,45 +32,47 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout) 
     var myDateString = yy + '.' + mm + '.' + dd;
 
     $scope.heavy = false;
-    $scope.sendRequest = function () {
+    $scope.sendRequest = function (value) {
+        console.log(value);
+        $scope.object = value;
+         var sendBodyObj = {
+             'article_id': +value.crime,
+             'crime_date': myDateString,
+             'article24_id': +value.stage,
+             'gender': +value.gender,
+             'age': value.age,
+             'soft': value.soft ? 1 : 0,
+             'heavy': value.heavy ? 1 : 0
+         };
+         console.log(sendBodyObj);
 
-        var sendBodyObj = {
-            'article_id': $scope.crime,
-            'crime_date': myDateString,
-            'article24_id': +$scope.stage,
-            'gender': +$scope.gender,
-            'age': $scope.age,
-            'soft': $scope.soft ? 1 : 0,
-            'heavy': $scope.heavy ? 1 : 0
-        };
-        console.log(sendBodyObj);
+         $http({
+             url: 'http://api.zandylyq.kz/v1/judgment/request/',
+             method: 'POST',
+             data: sendBodyObj
+         }).then(function (data) {
+             $scope.data = data;
+             $scope.typeMessage = data.data;
+             angular.forEach($scope.data, function (value) {
 
-        $http({
-            url: 'http://api.zandylyq.kz/v1/judgment/request/',
-            method: 'POST',
-            data: sendBodyObj
-        }).then(function (data) {
-            $scope.data = data;
-            $scope.typeMessage = data.data;
-            angular.forEach($scope.data, function (value) {
-                if (value.error_message) {
-                    $timeout(function () {
-                        $scope.searchByNumber = '';
-                        $scope.crime = '';
-                        $scope.gender = '';
-                        $scope.age = '';
-                        $scope.soft = '';
-                        $scope.heavy = '';
-                        $scope.stage = {};
-                        $scope.typeMessage = false;
-                    }, 10000)
-                }
-            });
+                 if (value.error_message) {
+                     $timeout(function () {
+                         $scope.object.searchByNumber = '';
+                         $scope.object.crime = '';
+                         $scope.object.gender = '';
+                         $scope.object.age = '';
+                         $scope.object.soft = '';
+                         $scope.object.heavy = '';
+                         $scope.object.stage = {};
+                         $scope.typeMessage = false;
+                     }, 5000)
+                 }
+             });
 
 
-        }, function (reason) {
-            console.log(reason)
-        })
+         }, function (reason) {
+             console.log(reason)
+         })
     };
 
 
