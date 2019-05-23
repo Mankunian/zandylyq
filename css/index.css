@@ -46,3 +46,7 @@ body{
     color: #800000;
     font-weight: 600;
 }
+
+.alert-success{
+    font-size: 13px;
+}

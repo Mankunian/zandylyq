@@ -115,15 +115,15 @@
                         </div>
                         <div class="col-sm-3">
                             <label class="control-label">Пол <span class="required">*</span></label><br>
-                            <input ng-model="male" type="radio" name="gender" value="male"> Мужской<br>
-                            <input ng-model="female" type="radio" name="gender" value="female"> Женский<br>
+                            <input ng-model="gender" type="radio" value="1"> Мужской<br>
+                            <input ng-model="gender" type="radio" value="2"> Женский<br>
                         </div>
                         <div class="col-sm-6">
-                            <label class="control-label">Отягчающие или смягчающие обстоятельства</label><br>
-                            <input type="checkbox" id="1" value="0" ng-model="Aggravating">
+                            <label class="control-label">Наличие обстоятельств</label><br>
+                            <input type="checkbox" id="1"  ng-model="heavy">
                             <label style="font-weight: 500" for="1">Отягчающие</label>
 
-                            <input type="checkbox" id="2" value="1" ng-model="emollients">
+                            <input type="checkbox" id="2"  ng-model="soft">
                             <label style="font-weight: 500" for="2">Смягчающие</label>
                         </div>
                     </div>
@@ -134,12 +134,15 @@
                                     class="required">*</span></label>
                             <input ng-model="searchByNumber" ng-keyup="(searchByNumber.length >= 3) && myFunction()" type="text" class="form-control" placeholder="Введите номер статьи">
                             <br>
-                            <p class="subtitle">Выберите наиболее тяжкое преступление</p>
-                            <select class="form-control" data-live-search="true" ng-model="trial.courtCode"
-                                    style="height: 34px; width: 100%">
-                                <option></option>
-                                <option ng-repeat="court in courts" value="{{court.courtID}}">{{court.nameRU}}</option>
-                            </select>
+                            <div ng-if="crimeList">
+                                <p class="subtitle">Выберите наиболее тяжкое преступление</p>
+                                <!--<span style="font-weight: 600">{{crime}}</span>-->
+                                <select class="form-control" data-live-search="true" ng-model="crime"
+                                        style="height: 34px; width: 100%">
+                                    <option></option>
+                                    <option ng-repeat="crime in crimeList" value="{{crime.id}}">{{crime.id}} - {{crime.name_ru}}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <br>
@@ -158,6 +161,15 @@
                     <br>
                     <div class="row text-center">
                         <button ng-click="sendRequest()" class="btn btn-primary">Отправить запрос</button>
+                    </div>
+
+                    <br>
+                    <div ng-if="typeMessage.error_message" class="alert alert-danger" role="alert">
+                        {{typeMessage.error_message}}
+                    </div>
+
+                    <div ng-if="typeMessage.result" class="alert alert-success" role="alert">
+                        {{typeMessage.result}}
                     </div>
                 </div>
             </form>
