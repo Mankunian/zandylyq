@@ -19,7 +19,7 @@ angular.module("app").controller("mainCtrl", function ($scope, $http) {
         console.log($scope.searchByNumber);
         $http({
             url: 'http://api.zandylyq.kz/v1/judgment/search-qualif-by-stat/',
-            // url: 'http://api.zandylyq.kz ',
+            headers: {'Content-Type': 'application/json'},
             method: 'POST',
             data: {qualif_name: $scope.searchByNumber}
         }).then(function (data) {
