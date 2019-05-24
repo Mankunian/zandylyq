@@ -139,10 +139,10 @@
                             <br>
                             <div ng-if="crimeList">
                                 <p class="subtitle">Выберите наиболее тяжкое преступление</p>
-                                <select class="form-control" data-live-search="true" ng-model="item.crime"
+                                <select ng-options="crime.id as crime.name_ru for crime in crimeList" class="form-control" data-live-search="true" ng-model="item.crime"
                                         style="height: 34px; width: 100%">
-                                    <option></option>
-                                    <option ng-repeat="crime in crimeList" value="{{crime.id}}">{{crime.id}} - {{crime.name_ru}}</option>
+                                    <option value="" ng-show="false"></option>
+                                    <!--<option ng-repeat="crime in crimeList" value="{{crime.id}}">{{crime.id}} - {{crime.name_ru}}</option>-->
                                 </select>
                             </div>
                         </div>
@@ -151,10 +151,10 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label class="control-label">Стадия преступления</label><br>
-                            <select class="form-control" data-live-search="true" ng-model="item.stage"
+                            <select ng-options="stage.id as stage.name_ru for stage in judgment.article24" class="form-control" data-live-search="true" ng-model="item.stage"
                                     style="height: 34px; width: 100%">
-                                <option></option>
-                                <option ng-repeat="stage in judgment.article24" value="{{stage.id}}">{{stage.name_ru}}</option>
+                                <option value="" ng-show="false"></option>
+                                <!--<option ng-repeat="stage in judgment.article24" value="{{stage.id}}">{{stage.name_ru}}</option>-->
                             </select>
                         </div>
                     </div>
