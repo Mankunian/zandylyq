@@ -47,7 +47,7 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout) 
             'crime_date': myDateString,
             'article24_id': +value.stage,
             'gender': +value.gender,
-            'age': value.age,
+            'age': +value.age,
             'soft': value.soft ? 1 : 0,
             'heavy': value.heavy ? 1 : 0
         };
