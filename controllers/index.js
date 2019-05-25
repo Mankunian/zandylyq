@@ -3,7 +3,6 @@ var myApp = angular.module('app', ['ui.bootstrap']);
 angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, $uibModal, $log) {
 
     $scope.showSendBtn = true;
-
     $scope.getCrimeStageList = function () {
         $http({
             url: 'http://api.zandylyq.kz/v1/judgment',
@@ -35,6 +34,7 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
 
 
     $scope.sendRequest = function (value) {
+        console.log($scope.item.searchByNumber);
         $scope.dataSentByModal = value;
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
@@ -64,6 +64,7 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
             value.age = '';
             value.soft = '';
             value.heavy = '';
+            value.dateFrom = '';
             value.stage = {};
             $scope.typeMessage = false;
         });
@@ -79,7 +80,9 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
 
 var modalContent = function ($scope, $uibModalInstance, $http, value) {
 
-    var d = new Date();
+    console.log(value);
+
+    var d = value.dateFrom;
     var mm = ((d.getMonth() < +1) < 10 ? '0' : '') + (d.getMonth() + 1);
     var dd = d.getDate();
     var yy = d.getFullYear();
@@ -90,7 +93,8 @@ var modalContent = function ($scope, $uibModalInstance, $http, value) {
     $scope.showClearBtn = false;
     $scope.getResponse = function () {
         var sendBodyObj = {
-            'article_id': +value.crime,
+            // 'article_id': +value.crime,
+            'article_id': +value.searchByNumber,
             'crime_date': myDateString,
             'article24_id': +value.stage,
             'gender': +value.gender,
@@ -117,8 +121,6 @@ var modalContent = function ($scope, $uibModalInstance, $http, value) {
     $scope.getResponse();
 
 
-
-
     $scope.cancel = function () {
         $uibModalInstance.dismiss();
         $scope.crimeList = '';
@@ -131,6 +133,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value) {
         value.soft = '';
         value.heavy = '';
         value.stage = {};
+        value.dateFrom = '';
         $scope.typeMessage = false;
 
     };

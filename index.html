@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/index.css">
 
 
+
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/ui-bootstrap.js"></script>
     <script src="controllers/index.js"></script>
@@ -96,25 +97,37 @@
                     <br>
                     <div class="row">
                         <div class="col-sm-12">
+                            <label>Выберите дату</label>
+                            <input class="form-control" data-format="dd.MM.yyyy" ng-model="item.dateFrom" type="date"
+                                   style="width: max-content" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12">
                             <label class="control-label"> Статья Уголовного кодекса <span
                                     class="required">*</span></label>
-                            <input ng-model="item.searchByNumber"
+                            <input list="crimeList" ng-model="item.searchByNumber"
                                    ng-keyup="(item.searchByNumber.length >= 3) && getCrimeBySearch(item)" type="text"
                                    class="form-control" placeholder="Введите номер статьи">
 
+                            <datalist id="crimeList" ng-model="item.crime">
+                                <option ng-repeat="crime in crimeList" value="{{crime.id}}">{{crime.stat}} -
+                                    {{crime.name_ru}}
+                                </option>
+                            </datalist>
                             <br>
-                            <div ng-if="crimeList">
+                            <!--<div ng-if="crimeList">
                                 <p class="subtitle">Выберите наиболее тяжкое преступление</p>
                                 <select ng-options="crime.id as (crime.stat+ ' - ' +crime.name_ru  )  for crime in crimeList"
                                         class="form-control" data-live-search="true" ng-model="item.crime"
                                         style="height: 34px; width: 100%">
                                     <option value="" ng-show="false"></option>
-                                    <!--<option ng-repeat="crime in crimeList" value="{{crime.id}}">{{crime.id}} - {{crime.name_ru}}</option>-->
+                                    &lt;!&ndash;<option ng-repeat="crime in crimeList" value="{{crime.id}}">{{crime.id}} - {{crime.name_ru}}</option>&ndash;&gt;
                                 </select>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
-                    <br>
                     <div class="row">
                         <div class="col-sm-12">
                             <label class="control-label">Стадия преступления</label><br>
