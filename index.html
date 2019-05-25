@@ -13,35 +13,8 @@
 
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/ui-bootstrap.js"></script>
-
-    <script src="Scripts/jquery-2.2.1.js"></script>
-    <script src="Scripts/angular-route.js"></script>
-    <script src="Scripts/bootstrap.min.js"></script>
-    <script src="Scripts/angularjs-dropdown-multiselect.js"></script>
-    <script src="Scripts/lodash.min.js"></script>
-    <script src="Scripts/ui-grid.js"></script>
-    <script src="Scripts/select.js"></script>
-    <script src="Scripts/ui-bootstrap-tpls-0.14.3.js"></script>
-    <script src="Scripts/zingchart.min.js"></script>
-    <script src="Scripts/zingchart-angularjs.js"></script>
-
-    <script src="controllers/app.module.js"></script>
-
-    <!--Scripts for Export CSV-->
-    <script src="Scripts/excel/uiGridFactory.js"></script>
-    <script src="Scripts/excel/alasql.min.js"></script>
-    <script src="Scripts/excel/Blob.js"></script>
-    <script src="Scripts/excel/csv.js"></script>
-    <script src="Scripts/excel/jszip.js"></script>
-    <script src="Scripts/excel/vfs_fonts.js"></script>
-    <script src="Scripts/excel/xlsx.core.min.js"></script>
-    <!--Scripts for Export CSV-->
-
-
-    <script src="Scripts/chart/Chart.min.js"></script>
-    <script src="Scripts/chart/angular-chart.min.js"></script>
-    <script src="Scripts/FileSaver.js"></script>
     <script src="controllers/index.js"></script>
+    <script src="Scripts/jquery-2.2.1.js"></script>
 
 
 </head>
@@ -63,18 +36,6 @@
         <ul class="nav navbar-nav">
             <li class="active"><a href="#">Главная</a></li>
             <li><a href="#">О нас</a></li>
-            <!--<li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Услуги <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">One more separated link</a></li>
-                </ul>
-            </li>-->
         </ul>
         <div class="col-sm-3 col-md-3">
             <form class="navbar-form" role="search">
@@ -119,9 +80,6 @@
                         </div>
                         <div class="col-sm-3">
                             <label class="control-label">Пол <span class="required">*</span></label><br>
-                            <!--<div ng-repeat="gen in judgment.genders">
-                                <input ng-model="item.gender" type="radio" value={{gen.id}}> {{gen.name_ru}}<br>
-                            </div>-->
                             <input ng-model="item.gender" type="radio" value='1'> Мужской<br>
                             <input ng-model="item.gender" type="radio" value='2'> Женский<br>
                         </div>
@@ -144,13 +102,6 @@
                                    ng-keyup="(item.searchByNumber.length >= 3) && getCrimeBySearch(item)" type="text"
                                    class="form-control" placeholder="Введите номер статьи">
 
-
-                            <!--<div class="crimeList" ng-if="crimeList">
-                                <p class="subtitle">Выберите наиболее тяжкое преступление</p>
-                                <div class="focus" ng-repeat="crime in crimeList">
-                                    <h4 ng-model="item.crime" ng-value="crime.id">{{crime.stat}} - {{crime.name_ru}}</h4>
-                                </div>
-                            </div>-->
                             <br>
                             <div ng-if="crimeList">
                                 <p class="subtitle">Выберите наиболее тяжкое преступление</p>
@@ -171,7 +122,6 @@
                                     class="form-control" data-live-search="true" ng-model="item.stage"
                                     style="height: 34px; width: 100%">
                                 <option value="" ng-show="false"></option>
-                                <!--<option ng-repeat="stage in judgment.article24" value="{{stage.id}}">{{stage.name_ru}}</option>-->
                             </select>
                         </div>
                     </div>
@@ -181,15 +131,7 @@
                         <button ng-show="showSendBtn" ng-click="sendRequest(item)" class="btn btn-primary">Отправить
                             запрос
                         </button>
-                        <!--<button ng-show="showClearBtn" ng-click="clearForm(item)" class="btn btn-danger">Очистить
-                            форму
-                        </button>-->
                     </div>
-
-                    <br>
-
-
-
                 </div>
             </form>
         </div>
@@ -200,27 +142,26 @@
 
     <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close"  ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="exampleModalLabel">Ответ от сервера</h4>
         </div>
 
-            <div class="modal-body">
-                <div ng-if="typeMessage.error_message" class="alert alert-danger" role="alert">
-                    {{typeMessage.error_message}}
-                </div>
+        <div class="modal-body">
+            <div ng-if="typeMessage.error_message" class="alert alert-danger" role="alert">
+                {{typeMessage.error_message}}
+            </div>
 
-                <div ng-if="typeMessage.result" class="alert alert-success" role="alert">
-                    {{typeMessage.result}}
-                </div>
+            <div ng-if="typeMessage.result" class="alert alert-success" role="alert">
+                {{typeMessage.result}}
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-danger" ng-click="cancel()">Закрыть</button>
-            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-danger" ng-click="cancel()">Закрыть</button>
+        </div>
 
     </div>
 
 </script>
-
 
 
 <script src="js/bootstrap.min.js"></script>
