@@ -17,9 +17,7 @@ body{
     height: 95vh;
 }
 
-.navbar {
-    margin-bottom: 0;
-}
+
 
 .form {
     max-width: 640px;
@@ -49,4 +47,24 @@ body{
 
 .alert-success{
     font-size: 13px;
+}
+
+.crimeList{
+    width: 100%;
+    height: 200px;
+    background: #dcdada;
+    margin: 2px 0;
+    border-radius: 3px;
+    padding: 8px;
+}
+
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.focus h4:focus{
+    background: red;
+    height: 10px;
+    width: 150px;
 }

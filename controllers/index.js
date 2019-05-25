@@ -1,4 +1,8 @@
-angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout) {
+var myApp = angular.module('app', ['ui.bootstrap']);
+
+angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, $uibModal, $log) {
+
+    $scope.showSendBtn = true;
 
     $scope.getCrimeStageList = function () {
         $http({
@@ -30,8 +34,52 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout) 
     };
 
 
+    $scope.sendRequest = function (value) {
+        $scope.dataSentByModal = value;
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'myModalContent.html',
+            controller: modalContent,
+            size: 'md',
+            resolve: {
+                value: function () {
+                    return $scope.dataSentByModal;
+                },
+                serverURL: function () {
+                    return $scope.serverURL;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+            $scope.crimeList = '';
+            $scope.showSendBtn = true;
+            $scope.showClearBtn = false;
+            value.searchByNumber = '';
+            value.crime = '';
+            value.gender = '';
+            value.age = '';
+            value.soft = '';
+            value.heavy = '';
+            value.stage = {};
+            $scope.typeMessage = false;
+        });
+
+        $scope.toggleAnimation = function () {
+            $scope.animationsEnabled = !$scope.animationsEnabled;
+        };
+    };
+
+
+});
+
+
+var modalContent = function ($scope, $uibModalInstance, $http, value) {
+
     var d = new Date();
-    // var mm = d.getMonth() + 1;
     var mm = ((d.getMonth() < +1) < 10 ? '0' : '') + (d.getMonth() + 1);
     var dd = d.getDate();
     var yy = d.getFullYear();
@@ -39,9 +87,8 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout) 
     var myDateString = yy + '.' + mm + '.' + dd;
 
     $scope.heavy = false;
-    $scope.sendRequest = function (value) {
-        console.log(value);
-        $scope.object = value;
+    $scope.showClearBtn = false;
+    $scope.getResponse = function () {
         var sendBodyObj = {
             'article_id': +value.crime,
             'crime_date': myDateString,
@@ -51,7 +98,6 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout) 
             'soft': value.soft ? 1 : 0,
             'heavy': value.heavy ? 1 : 0
         };
-        console.log(sendBodyObj);
 
         $http({
             url: 'http://api.zandylyq.kz/v1/judgment/request/',
@@ -60,27 +106,32 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout) 
         }).then(function (data) {
             $scope.data = data;
             $scope.typeMessage = data.data;
-            angular.forEach($scope.data, function (value) {
-
-                if (value.error_message) {
-                    $timeout(function () {
-                        $scope.object.searchByNumber = '';
-                        $scope.object.crime = '';
-                        $scope.object.gender = '';
-                        $scope.object.age = '';
-                        $scope.object.soft = '';
-                        $scope.object.heavy = '';
-                        $scope.object.stage = {};
-                        $scope.typeMessage = false;
-                    }, 10000)
-                }
-            });
-
-
+            $scope.showClearBtn = true;
+            $scope.showSendBtn = false;
         }, function (reason) {
             console.log(reason)
-        })
+        });
+
+        $uibModalInstance.close();
     };
+    $scope.getResponse();
 
 
-});
+
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss();
+        $scope.crimeList = '';
+        $scope.showSendBtn = true;
+        $scope.showClearBtn = false;
+        value.searchByNumber = '';
+        value.crime = '';
+        value.gender = '';
+        value.age = '';
+        value.soft = '';
+        value.heavy = '';
+        value.stage = {};
+        $scope.typeMessage = false;
+
+    };
+};

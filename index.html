@@ -12,6 +12,7 @@
 
 
     <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/ui-bootstrap.js"></script>
 
     <script src="Scripts/jquery-2.2.1.js"></script>
     <script src="Scripts/angular-route.js"></script>
@@ -41,6 +42,8 @@
     <script src="Scripts/chart/angular-chart.min.js"></script>
     <script src="Scripts/FileSaver.js"></script>
     <script src="controllers/index.js"></script>
+
+
 </head>
 <body ng-controller="mainCtrl">
 <nav class="navbar navbar-default" role="navigation">
@@ -111,9 +114,10 @@
                         <div class="col-sm-3">
                             <label class="control-label">Возраст <span class="required">*</span></label>
                             <p class="subtitle">Укажите полный возраст на момент совершения преступления</p>
-                            <input type="text" pattern="\d*" maxlength="2" class="form-control" ng-model="item.age" required>
+                            <input type="text" pattern="\d*" maxlength="2" class="form-control" ng-model="item.age"
+                                   required>
                         </div>
-                        <div class="col-sm-3" >
+                        <div class="col-sm-3">
                             <label class="control-label">Пол <span class="required">*</span></label><br>
                             <!--<div ng-repeat="gen in judgment.genders">
                                 <input ng-model="item.gender" type="radio" value={{gen.id}}> {{gen.name_ru}}<br>
@@ -123,11 +127,12 @@
                         </div>
                         <div class="col-sm-6">
                             <label class="control-label">Наличие обстоятельств</label><br>
-                            <input type="checkbox" id="1"  ng-model="item.heavy">
-                            <label style="font-weight: 500" for="1">Отягчающие</label>
 
-                            <input type="checkbox" id="2"  ng-model="item.soft">
+
+                            <input type="checkbox" id="2" ng-model="item.soft">
                             <label style="font-weight: 500" for="2">Смягчающие</label>
+                            <input type="checkbox" id="1" ng-model="item.heavy">
+                            <label style="font-weight: 500" for="1">Отягчающие</label>
                         </div>
                     </div>
                     <br>
@@ -135,11 +140,22 @@
                         <div class="col-sm-12">
                             <label class="control-label"> Статья Уголовного кодекса <span
                                     class="required">*</span></label>
-                            <input ng-model="item.searchByNumber" ng-keyup="(item.searchByNumber.length >= 3) && getCrimeBySearch(item)" type="text" class="form-control" placeholder="Введите номер статьи">
+                            <input ng-model="item.searchByNumber"
+                                   ng-keyup="(item.searchByNumber.length >= 3) && getCrimeBySearch(item)" type="text"
+                                   class="form-control" placeholder="Введите номер статьи">
+
+
+                            <!--<div class="crimeList" ng-if="crimeList">
+                                <p class="subtitle">Выберите наиболее тяжкое преступление</p>
+                                <div class="focus" ng-repeat="crime in crimeList">
+                                    <h4 ng-model="item.crime" ng-value="crime.id">{{crime.stat}} - {{crime.name_ru}}</h4>
+                                </div>
+                            </div>-->
                             <br>
                             <div ng-if="crimeList">
                                 <p class="subtitle">Выберите наиболее тяжкое преступление</p>
-                                <select ng-options="crime.id as crime.name_ru for crime in crimeList" class="form-control" data-live-search="true" ng-model="item.crime"
+                                <select ng-options="crime.id as (crime.stat+ ' - ' +crime.name_ru  )  for crime in crimeList"
+                                        class="form-control" data-live-search="true" ng-model="item.crime"
                                         style="height: 34px; width: 100%">
                                     <option value="" ng-show="false"></option>
                                     <!--<option ng-repeat="crime in crimeList" value="{{crime.id}}">{{crime.id}} - {{crime.name_ru}}</option>-->
@@ -151,7 +167,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label class="control-label">Стадия преступления</label><br>
-                            <select ng-options="stage.id as stage.name_ru for stage in judgment.article24" class="form-control" data-live-search="true" ng-model="item.stage"
+                            <select ng-options="stage.id as stage.name_ru for stage in judgment.article24"
+                                    class="form-control" data-live-search="true" ng-model="item.stage"
                                     style="height: 34px; width: 100%">
                                 <option value="" ng-show="false"></option>
                                 <!--<option ng-repeat="stage in judgment.article24" value="{{stage.id}}">{{stage.name_ru}}</option>-->
@@ -161,22 +178,49 @@
 
                     <br>
                     <div class="row text-center">
-                        <button ng-click="sendRequest(item)" class="btn btn-primary">Отправить запрос</button>
+                        <button ng-show="showSendBtn" ng-click="sendRequest(item)" class="btn btn-primary">Отправить
+                            запрос
+                        </button>
+                        <!--<button ng-show="showClearBtn" ng-click="clearForm(item)" class="btn btn-danger">Очистить
+                            форму
+                        </button>-->
                     </div>
 
                     <br>
-                    <div ng-if="typeMessage.error_message" class="alert alert-danger" role="alert">
-                        {{typeMessage.error_message}}
-                    </div>
 
-                    <div ng-if="typeMessage.result" class="alert alert-success" role="alert">
-                        {{typeMessage.result}}
-                    </div>
+
+
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script type="text/ng-template" id="myModalContent.html">
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close"  ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">Ответ от сервера</h4>
+        </div>
+
+            <div class="modal-body">
+                <div ng-if="typeMessage.error_message" class="alert alert-danger" role="alert">
+                    {{typeMessage.error_message}}
+                </div>
+
+                <div ng-if="typeMessage.result" class="alert alert-success" role="alert">
+                    {{typeMessage.result}}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" ng-click="cancel()">Закрыть</button>
+            </div>
+
+    </div>
+
+</script>
+
 
 
 <script src="js/bootstrap.min.js"></script>
