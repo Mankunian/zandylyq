@@ -85,7 +85,7 @@
                             <input ng-model="item.gender" type="radio" value='2'> Женский<br>
                         </div>
                         <div class="col-sm-6">
-                            <label class="control-label">Наличие обстоятельств</label><br>
+                            <label class="control-label">Наличие смягчающих/отягчающих вину обстоятельств</label><br>
 
 
                             <input type="checkbox" id="2" ng-model="item.soft">
@@ -97,7 +97,7 @@
                     <br>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label>Выберите дату</label>
+                            <label>Дата совершения правонарушения</label>
                             <input class="form-control" data-format="dd.MM.yyyy" ng-model="item.dateFrom" type="date"
                                    style="width: max-content" required>
                         </div>
@@ -112,8 +112,8 @@
                                    class="form-control" placeholder="Введите номер статьи">
 
                             <datalist id="crimeList" ng-model="item.crime">
-                                <option ng-repeat="crime in crimeList" value="{{crime.id}}">{{crime.stat}} -
-                                    {{crime.name_ru}}
+                                <option value="{{crime.id}}" ng-repeat="crime in crimeList">
+                                    {{crime.stat}} - {{crime.name_ru}}
                                 </option>
                             </datalist>
                             <br>
@@ -131,7 +131,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label class="control-label">Стадия преступления</label><br>
-                            <select ng-options="stage.id as stage.name_ru for stage in judgment.article24"
+                            <select required ng-options="stage.id as stage.name_ru for stage in judgment.article24"
                                     class="form-control" data-live-search="true" ng-model="item.stage"
                                     style="height: 34px; width: 100%">
                                 <option value="" ng-show="false"></option>

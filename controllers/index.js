@@ -34,7 +34,6 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
 
 
     $scope.sendRequest = function (value) {
-        console.log($scope.item.searchByNumber);
         $scope.dataSentByModal = value;
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
