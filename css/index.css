@@ -2,6 +2,13 @@ body{
     overflow: hidden;
 }
 
+img.logo{
+    float: left;
+    width: 44px;
+    padding: 4px;
+    margin: 3px;
+}
+
 .title {
     font-weight: bold;
     font-family: sans-serif;
@@ -10,7 +17,9 @@ body{
 }
 
 .main {
-    background-image: url("../img/background.jpg");
+    /*background-image: url("../img/background.jpg");*/
+    /*background-image: url("../img/1.jpg");*/
+    background-image: url("../img/2.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -67,4 +76,72 @@ body{
     background: red;
     height: 10px;
     width: 150px;
+}
+
+
+/*Preloader*/
+/* Preloader */
+
+/* Ignore this "Body" */
+
+.load__none {
+    display: none;
+    color:#fff;
+}
+
+.load__animation{
+    border: 5px solid #272727;
+    border-top-color: #e50914;
+    border-top-style: groove;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    -webkit-animation: turn 1.5s linear infinite;
+    -o-animation: turn 1.5s linear infinite;
+    animation: turn 1.5s linear infinite;
+}
+
+.load {
+   /* position: fixed;
+    background: url(http://i.imgur.com/JUlfODF.png) no-repeat 50% fixed / cover;);
+    width: 100%;
+    height: 100vh;*/
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.load__container {
+    position: relative;
+}
+
+@keyframes turn {
+    from {transform: rotate(0deg)}
+    to {transform: rotate(360deg)}
+}
+
+.load__title {
+    color: #fff;
+    font-size: 2rem;
+}
+
+
+@keyframes loadPage {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+    100% {
+        opacity: 1;
+    }
+
 }

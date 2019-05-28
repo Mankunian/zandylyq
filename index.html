@@ -29,16 +29,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Zandylyq</a>
+        <img src="img/balance.png" alt="logo" class="logo">
+        <a class="navbar-brand" href="#">ZANDYLYQ</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Главная</a></li>
+            <li class="active"><a href="#">Проверка приговора</a></li>
             <li><a href="#">О нас</a></li>
         </ul>
-        <div class="col-sm-3 col-md-3">
+        <div class="col-sm-3 col-md-3 hidden">
             <form class="navbar-form" role="search">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Поиск" name="q">
@@ -81,7 +82,7 @@
                         </div>
                         <div class="col-sm-3">
                             <label class="control-label">Пол <span class="required">*</span></label><br>
-                            <input ng-model="item.gender" type="radio" value='1'> Мужской<br>
+                            <input ng-model="item.gender" type="radio" value='1' required> Мужской<br>
                             <input ng-model="item.gender" type="radio" value='2'> Женский<br>
                         </div>
                         <div class="col-sm-6">
@@ -97,7 +98,8 @@
                     <br>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label>Дата совершения правонарушения</label>
+                            <label>Дата совершения правонарушения <span
+                                    class="required">*</span></label>
                             <input class="form-control" data-format="dd.MM.yyyy" ng-model="item.dateFrom" type="date"
                                    style="width: max-content" required>
                         </div>
@@ -107,16 +109,17 @@
                         <div class="col-sm-12">
                             <label class="control-label"> Статья Уголовного кодекса <span
                                     class="required">*</span></label>
-                            <input list="crimeList" ng-model="item.searchByNumber"
+                            <input required list="crimeList" ng-model="item.searchByNumber"
                                    ng-keyup="(item.searchByNumber.length >= 3) && getCrimeBySearch(item)" type="text"
                                    class="form-control" placeholder="Введите номер статьи">
 
-                            <datalist id="crimeList" ng-model="item.crime.id">
+                            <datalist required id="crimeList" ng-model="item.crime.id">
                                 <option value="{{crime.stat}}" ng-repeat="crime in crimeList">
                                    <!--{{crime.stat}} - {{crime.name_ru}}-->
                                 </option>
                             </datalist>
-                            {{item.crime}}
+
+                            <span style="font-size: small; font-style: italic; color: red;">*Обязательное поле</span>
                             <br>
                             <!--<div ng-if="crimeList">
                                 <p class="subtitle">Выберите наиболее тяжкое преступление</p>
@@ -129,20 +132,22 @@
                             </div>-->
                         </div>
                     </div>
+                    <br>
                     <div class="row">
                         <div class="col-sm-12">
                             <label class="control-label">Стадия преступления</label><br>
                             <select required ng-options="stage.id as stage.name_ru for stage in judgment.article24"
-                                    class="form-control" data-live-search="true" ng-model="item.stage"
+                                    class="form-control" ng-model="item.stage"
                                     style="height: 34px; width: 100%">
-                                <option value="" ng-show="false"></option>
+                                <option selected disabled value="" ng-show="false"></option>
                             </select>
+                            <span style="font-size: small; font-style: italic; color: red;">*Обязательное поле</span>
                         </div>
                     </div>
 
                     <br>
                     <div class="row text-center">
-                        <button ng-show="showSendBtn" ng-click="sendRequest(item)" class="btn btn-primary">Отправить
+                        <button ng-disabled="!item.searchByNumber || !item.stage" ng-show="showSendBtn" ng-click="sendRequest(item)" class="btn btn-primary">Отправить
                             запрос
                         </button>
                     </div>
@@ -161,6 +166,16 @@
         </div>
 
         <div class="modal-body">
+
+            <!-- Preloader -->
+            <div ng-show="loader" id="Load" class="load">
+                <div class="load__container">
+                    <div class="load__animation"></div>
+                    <div class="load__mask"></div>
+                    <span class="load__title">Carregando...</span>
+                </div>
+            </div>
+
             <div ng-if="typeMessage.error_message" class="alert alert-danger" role="alert">
                 {{typeMessage.error_message}}
             </div>

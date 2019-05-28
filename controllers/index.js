@@ -28,7 +28,6 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
                 $scope.crimeList = value;
 
 
-
                 angular.forEach(value, function (item) {
                     // console.log(item.stat);
                     // console.log(search.searchByNumber);
@@ -99,7 +98,7 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
 var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
 
     angular.forEach(article, function (value) {
-       $scope.articleId = value.id
+        $scope.articleId = value.id
     });
 
     var d = value.dateFrom;
@@ -111,6 +110,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
 
     $scope.heavy = false;
     $scope.showClearBtn = false;
+    $scope.loader = false;
     $scope.getResponse = function () {
         var sendBodyObj = {
             // 'article_id': +value.searchByNumber,
@@ -122,7 +122,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
             'soft': value.soft ? 1 : 0,
             'heavy': value.heavy ? 1 : 0
         };
-
+        $scope.loader = true;
         $http({
             url: 'http://api.zandylyq.kz/v1/judgment/request/',
             method: 'POST',
@@ -132,6 +132,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
             $scope.typeMessage = data.data;
             $scope.showClearBtn = true;
             $scope.showSendBtn = false;
+            $scope.loader = false;
         }, function (reason) {
             console.log(reason)
         });
