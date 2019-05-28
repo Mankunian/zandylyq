@@ -111,11 +111,12 @@
                                    ng-keyup="(item.searchByNumber.length >= 3) && getCrimeBySearch(item)" type="text"
                                    class="form-control" placeholder="Введите номер статьи">
 
-                            <datalist id="crimeList" ng-model="item.crime">
-                                <option value="{{crime.id}}" ng-repeat="crime in crimeList">
-                                    {{crime.stat}} - {{crime.name_ru}}
+                            <datalist id="crimeList" ng-model="item.crime.id">
+                                <option value="{{crime.stat}}" ng-repeat="crime in crimeList">
+                                   <!--{{crime.stat}} - {{crime.name_ru}}-->
                                 </option>
                             </datalist>
+                            {{item.crime}}
                             <br>
                             <!--<div ng-if="crimeList">
                                 <p class="subtitle">Выберите наиболее тяжкое преступление</p>

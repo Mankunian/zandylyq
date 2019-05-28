@@ -16,9 +16,9 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
     };
     $scope.getCrimeStageList();
 
-
-    $scope.getCrimeBySearch = function () {
-        console.log($scope.item.searchByNumber);
+    $scope.equalCrime = [];
+    $scope.getCrimeBySearch = function (search) {
+        console.log(search);
         $http({
             url: 'http://api.zandylyq.kz/v1/judgment/search-qualif-by-stat/',
             method: 'POST',
@@ -26,6 +26,21 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
         }).then(function (data) {
             angular.forEach(data.data, function (value) {
                 $scope.crimeList = value;
+
+
+
+                angular.forEach(value, function (item) {
+                    // console.log(item.stat);
+                    // console.log(search.searchByNumber);
+                    var crimeItem = {};
+                    if (search.searchByNumber === item.stat) {
+                        crimeItem.id = item.id;
+                        crimeItem.label = item.stat;
+                        $scope.equalCrime.push(crimeItem)
+                    }
+                    // console.log($scope.equalCrime)
+
+                })
             });
         }, function (error) {
             console.log(error)
@@ -34,6 +49,7 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
 
 
     $scope.sendRequest = function (value) {
+        console.log($scope.equalCrime);
         $scope.dataSentByModal = value;
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
@@ -46,6 +62,9 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
                 },
                 serverURL: function () {
                     return $scope.serverURL;
+                },
+                article: function () {
+                    return $scope.equalCrime
                 }
             }
         });
@@ -77,9 +96,11 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
 });
 
 
-var modalContent = function ($scope, $uibModalInstance, $http, value) {
+var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
 
-    console.log(value);
+    angular.forEach(article, function (value) {
+       $scope.articleId = value.id
+    });
 
     var d = value.dateFrom;
     var mm = ((d.getMonth() < +1) < 10 ? '0' : '') + (d.getMonth() + 1);
@@ -92,8 +113,8 @@ var modalContent = function ($scope, $uibModalInstance, $http, value) {
     $scope.showClearBtn = false;
     $scope.getResponse = function () {
         var sendBodyObj = {
-            // 'article_id': +value.crime,
-            'article_id': +value.searchByNumber,
+            // 'article_id': +value.searchByNumber,
+            'article_id': $scope.articleId,
             'crime_date': myDateString,
             'article24_id': +value.stage,
             'gender': +value.gender,
