@@ -1,4 +1,4 @@
-var myApp = angular.module('app', ['ui.bootstrap']);
+var myApp = angular.module('app', ['ui.bootstrap', 'ngSanitize']);
 
 angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, $uibModal, $log) {
 
