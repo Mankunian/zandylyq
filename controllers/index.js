@@ -1,6 +1,14 @@
-var myApp = angular.module('app', ['ui.bootstrap']);
+var myApp = angular.module('app', ['ui.bootstrap', 'ngSanitize']);
+
+angular.module('app').filter('trusted', function ($sce) {
+   return function (html) {
+       return $sce.trustAsHtml(html)
+   }
+});
 
 angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, $uibModal, $log) {
+
+
 
     $scope.showSendBtn = true;
     $scope.getCrimeStageList = function () {
@@ -54,7 +62,7 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
             animation: $scope.animationsEnabled,
             templateUrl: 'myModalContent.html',
             controller: modalContent,
-            size: 'md',
+            size: 'lg',
             resolve: {
                 value: function () {
                     return $scope.dataSentByModal;
