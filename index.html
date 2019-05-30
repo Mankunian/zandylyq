@@ -110,8 +110,9 @@
                     <br>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label class="control-label"> Статья Уголовного кодекса <span
-                                    class="required">*</span></label>
+                            <label class="control-label"> Статья Уголовного кодекса
+                                <span class="required">*</span>
+                            </label>
                             <input required list="crimeList" ng-model="item.searchByNumber"
                                    ng-keyup="(item.searchByNumber.length >= 3) && getCrimeBySearch(item)" type="text"
                                    class="form-control" placeholder="Введите номер статьи">
@@ -122,7 +123,7 @@
                                 </option>
                             </datalist>
 
-                            <span style="font-size: small; font-style: italic; color: red;">*Обязательное поле</span>
+                            <!--<span style="font-size: small; font-style: italic; color: red;">*Обязательное поле</span>-->
                             <br>
                             <!--<div ng-if="crimeList">
                                 <p class="subtitle">Выберите наиболее тяжкое преступление</p>
@@ -135,16 +136,15 @@
                             </div>-->
                         </div>
                     </div>
-                    <br>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label class="control-label">Стадия преступления</label><br>
+                            <label class="control-label">Стадия преступления    <span class="required">*</span></label><br>
                             <select required ng-options="stage.id as stage.name_ru for stage in judgment.article24"
                                     class="form-control" ng-model="item.stage"
                                     style="height: 34px; width: 100%">
                                 <option selected disabled value="" ng-show="false"></option>
                             </select>
-                            <span style="font-size: small; font-style: italic; color: red;">*Обязательное поле</span>
+                            <!--<span style="font-size: small; font-style: italic; color: red;">*Обязательное поле</span>-->
                         </div>
                     </div>
 

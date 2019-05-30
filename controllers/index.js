@@ -54,7 +54,7 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
             animation: $scope.animationsEnabled,
             templateUrl: 'myModalContent.html',
             controller: modalContent,
-            size: 'md',
+            size: 'lg',
             resolve: {
                 value: function () {
                     return $scope.dataSentByModal;
