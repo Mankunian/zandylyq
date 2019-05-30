@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="css/index.css">
 
 
-
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/ui-bootstrap.js"></script>
     <script src="controllers/index.js"></script>
@@ -113,11 +112,15 @@
                                    ng-keyup="(item.searchByNumber.length >= 3) && getCrimeBySearch(item)" type="text"
                                    class="form-control" placeholder="Введите номер статьи">
 
+
                             <datalist required id="crimeList" ng-model="item.crime.id">
+                                <!--[if lte IE 9]><select data-datalist="crimeList"><![endif]-->
                                 <option value="{{crime.stat}}" ng-repeat="crime in crimeList">
-                                   <!--{{crime.stat}} - {{crime.name_ru}}-->
+                                    <!--{{crime.stat}} - {{crime.name_ru}}-->
                                 </option>
+                                <!--[if lte IE 9]></select><![endif]-->
                             </datalist>
+
 
                             <span style="font-size: small; font-style: italic; color: red;">*Обязательное поле</span>
                             <br>
@@ -147,7 +150,8 @@
 
                     <br>
                     <div class="row text-center">
-                        <button ng-disabled="!item.searchByNumber || !item.stage" ng-show="showSendBtn" ng-click="sendRequest(item)" class="btn btn-primary">Отправить
+                        <button ng-disabled="!item.searchByNumber || !item.stage" ng-show="showSendBtn"
+                                ng-click="sendRequest(item)" class="btn btn-primary">Отправить
                             запрос
                         </button>
                     </div>
@@ -192,7 +196,21 @@
 
 </script>
 
+<script>
+    (function () {
+        var inputs = document.getElementsByTagName('input');
+        for (var i = 0; i < inputs.length; i++) {
+            var input = inputs[i];
+            input.onchange = function (evt) {
+                var elem = evt ? evt.target : window.event.srcElement;
+                // alert('new value: ' + elem.value);
+            };
+        }
+    }());
+</script>
+
 
 <script src="js/bootstrap.min.js"></script>
+<script src="js/datalist.polyfill.min.js"></script>
 </body>
 </html>
