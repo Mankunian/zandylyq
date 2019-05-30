@@ -153,6 +153,7 @@
                         <button ng-disabled="!item.searchByNumber || !item.stage" ng-show="showSendBtn" ng-click="sendRequest(item)" class="btn btn-primary">Отправить
                             запрос
                         </button>
+                        <button ng-disabled="!item" class="btn btn-danger" ng-click="clearForm(item)">Очистить форму</button>
                     </div>
                 </div>
             </form>

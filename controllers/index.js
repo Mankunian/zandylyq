@@ -80,24 +80,28 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
             $scope.selected = selectedItem;
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
-            $scope.crimeList = '';
-            $scope.showSendBtn = true;
-            $scope.showClearBtn = false;
-            value.searchByNumber = '';
-            value.crime = '';
-            value.gender = '';
-            value.age = '';
-            value.soft = '';
-            value.heavy = '';
-            value.dateFrom = '';
-            value.stage = {};
-            $scope.typeMessage = false;
+
         });
 
         $scope.toggleAnimation = function () {
             $scope.animationsEnabled = !$scope.animationsEnabled;
         };
     };
+
+    $scope.clearForm = function (value) {
+        $scope.crimeList = '';
+          /* $scope.showSendBtn = true;
+           $scope.showClearBtn = false;*/
+           value.searchByNumber = '';
+           value.crime = '';
+           value.gender = '';
+           value.age = '';
+           value.soft = '';
+           value.heavy = '';
+           value.dateFrom = '';
+           value.stage = {};
+           $scope.typeMessage = false;
+    }
 
 
 });
@@ -152,7 +156,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss();
-        $scope.crimeList = '';
+       /* $scope.crimeList = '';
         $scope.showSendBtn = true;
         $scope.showClearBtn = false;
         value.searchByNumber = '';
@@ -163,7 +167,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
         value.heavy = '';
         value.stage = {};
         value.dateFrom = '';
-        $scope.typeMessage = false;
+        $scope.typeMessage = false;*/
 
     };
 };
