@@ -113,27 +113,21 @@
                             <label class="control-label"> Статья Уголовного кодекса
                                 <span class="required">*</span>
                             </label>
-                            <input required list="crimeList" ng-model="item.searchByNumber"
+                            <!--<input required list="crimeList" ng-model="item.searchByNumber"
                                    ng-keyup="(item.searchByNumber.length >= 3) && getCrimeBySearch(item)" type="text"
                                    class="form-control" placeholder="Введите номер статьи">
 
                             <datalist required id="crimeList" ng-model="item.crime.id">
                                 <option value="{{crime.stat}}" ng-repeat="crime in crimeList">
-                                   <!--{{crime.stat}} - {{crime.name_ru}}-->
                                 </option>
-                            </datalist>
+                            </datalist>-->
+                            <select required ng-options="crime.id as crime.stat for crime in crimeList.articles"
+                                    class="form-control" ng-model="item.crime"
+                                    style="height: 34px; width: 100%">
+                                <option selected disabled value="" ng-show="false"></option>
+                            </select>
 
-                            <!--<span style="font-size: small; font-style: italic; color: red;">*Обязательное поле</span>-->
                             <br>
-                            <!--<div ng-if="crimeList">
-                                <p class="subtitle">Выберите наиболее тяжкое преступление</p>
-                                <select ng-options="crime.id as (crime.stat+ ' - ' +crime.name_ru  )  for crime in crimeList"
-                                        class="form-control" data-live-search="true" ng-model="item.crime"
-                                        style="height: 34px; width: 100%">
-                                    <option value="" ng-show="false"></option>
-                                    &lt;!&ndash;<option ng-repeat="crime in crimeList" value="{{crime.id}}">{{crime.id}} - {{crime.name_ru}}</option>&ndash;&gt;
-                                </select>
-                            </div>-->
                         </div>
                     </div>
                     <div class="row">
@@ -144,13 +138,12 @@
                                     style="height: 34px; width: 100%">
                                 <option selected disabled value="" ng-show="false"></option>
                             </select>
-                            <!--<span style="font-size: small; font-style: italic; color: red;">*Обязательное поле</span>-->
                         </div>
                     </div>
 
                     <br>
                     <div class="row text-center">
-                        <button ng-disabled="!item.searchByNumber || !item.stage" ng-show="showSendBtn" ng-click="sendRequest(item)" class="btn btn-primary">Отправить
+                        <button ng-disabled="!item.stage" ng-show="showSendBtn" ng-click="sendRequest(item)" class="btn btn-primary">Отправить
                             запрос
                         </button>
                         <button ng-disabled="!item" class="btn btn-danger" ng-click="clearForm(item)">Очистить форму</button>
