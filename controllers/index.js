@@ -69,6 +69,7 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
 
     $scope.sendRequest = function (value) {
         console.log(value);
+
         $scope.dataSentByModal = value;
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
@@ -101,9 +102,9 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
     };
 
     $scope.clearForm = function (value) {
+
+        console.log(value.crime);
         $scope.crimeList = '';
-        /* $scope.showSendBtn = true;
-         $scope.showClearBtn = false;*/
         value.searchByNumber = '';
         value.crime = '';
         value.gender = '';
@@ -113,6 +114,9 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
         value.dateFrom = '';
         value.stage = {};
         $scope.typeMessage = false;
+
+        $scope.getCrimeList();
+        $scope.item = {}
     }
 
 
