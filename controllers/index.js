@@ -184,18 +184,5 @@ var modalContent = function ($scope, $uibModalInstance, $http, value) {
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss();
-        /* $scope.crimeList = '';
-         $scope.showSendBtn = true;
-         $scope.showClearBtn = false;
-         value.searchByNumber = '';
-         value.crime = '';
-         value.gender = '';
-         value.age = '';
-         value.soft = '';
-         value.heavy = '';
-         value.stage = {};
-         value.dateFrom = '';
-         $scope.typeMessage = false;*/
-
     };
 };

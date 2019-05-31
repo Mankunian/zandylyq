@@ -121,7 +121,7 @@
                                 <option value="{{crime.stat}}" ng-repeat="crime in crimeList">
                                 </option>
                             </datalist>-->
-                            <select required ng-options="crime.id as crime.stat for crime in crimeList.articles"
+                            <select required ng-options="crime.id as crime.stat + ' - ' + crime.name_ru for crime in crimeList.articles"
                                     class="form-control" ng-model="item.crime"
                                     style="height: 34px; width: 100%">
                                 <option selected disabled value="" ng-show="false"></option>
