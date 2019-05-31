@@ -156,6 +156,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value) {
         $http({
             url: 'http://api.zandylyq.kz/v1/judgment/request/',
             method: 'POST',
+            headers: {'cache-control': 'no-cache', contentType: false, cache: false},
             data: sendBodyObj
         }).then(function (data) {
             $scope.data = data;
