@@ -125,11 +125,11 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
 
 var modalContent = function ($scope, $uibModalInstance, $http, value) {
 
-   /* angular.forEach(article, function (value) {
-        $scope.articleId = value.id
-    });*/
+    /* angular.forEach(article, function (value) {
+         $scope.articleId = value.id
+     });*/
 
-   console.log(value);
+    console.log(value);
 
     var d = value.dateFrom;
     var mm = ((d.getMonth() < +1) < 10 ? '0' : '') + (d.getMonth() + 1);
@@ -154,9 +154,19 @@ var modalContent = function ($scope, $uibModalInstance, $http, value) {
         };
         $scope.loader = true;
         $http({
-            url: 'http://api.zandylyq.kz/v1/judgment/request/',
+            url: 'http://api.zandylyq.kz/v1/judgment/request/?&nocache=2',
             method: 'POST',
-            data: sendBodyObj
+            data: sendBodyObj,
+            cache: false,
+            contentType: false,
+            async: true,
+            processData: false,
+            headers: {
+                'Access-Control-Allow-Origin': true,
+                'Content-Type': 'application/json; charset=utf-8',
+                "X-Requested-With": "XMLHttpRequest"
+                //"Cache-control": "no-cache"
+            }
         }).then(function (data) {
             $scope.data = data;
             $scope.typeMessage = data.data;
