@@ -10,7 +10,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index.css">
 
-
+    <!--uiSelect-->
+    <link rel="stylesheet" href="css/ui-select/select2.css">
+    <link rel="stylesheet" href="css/ui-select/selectize.default.css">
+    <link rel="stylesheet" href="css/ui-select/select.min.css">
+    <!--uiSelect-->
 
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/ui-bootstrap.js"></script>
@@ -19,7 +23,23 @@
 
     <script src="Scripts/angular-sanitize.js"></script>
     <script src="Scripts/angular-route.js"></script>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>-->
+
+    <!--uiSelect-->
+    <script src="Scripts/ui-select/select.min.js"></script>
+    <!--uiSelect-->
+
+
+    <style>
+        .select2 > .select2-choice.ui-select-match {
+            /* Because of the inclusion of Bootstrap */
+            height: 29px;
+        }
+
+        .selectize-control > .selectize-dropdown {
+            top: 36px;
+        }
+    </style>
+
 
 
 </head>
@@ -114,26 +134,24 @@
                             <label class="control-label"> Статья Уголовного кодекса
                                 <span class="required">*</span>
                             </label>
-                            <!--<input required list="crimeList" ng-model="item.searchByNumber"
-                                   ng-keyup="(item.searchByNumber.length >= 3) && getCrimeBySearch(item)" type="text"
-                                   class="form-control" placeholder="Введите номер статьи">
-
-                            <datalist required id="crimeList" ng-model="item.crime.id">
-                                <option value="{{crime.stat}}" ng-repeat="crime in crimeList">
-                                </option>
-                            </datalist>-->
-                            <select required ng-options="crime.id as crime.stat + ' - ' + crime.name_ru for crime in crimeList.articles"
+                            <!--<select required ng-options="crime.id as crime.stat + ' - ' + crime.name_ru for crime in crimeList.articles"
                                     class="form-control" ng-model="item.crime"
                                     style="height: 34px; width: 100%">
                                 <option selected disabled value="" ng-show="false"></option>
-                            </select>
+                            </select>-->
 
+                            <ui-select tagging tagging-label="('new')" ng-model="singleDemo.crime" theme="bootstrap" title="Choose a color">
+                                <ui-select-match  placeholder="Выберите статью..."><span>{{$select.selected.stat}} - {{$select.selected.name_ru}}</span></ui-select-match>
+                                <ui-select-choices repeat="crime in crimeList.articles | filter: $select.search">
+                                    <div ng-bind-html="(crime.stat | highlight: $select.search ) + '  ' +( crime.name_ru)"></div>
+                                </ui-select-choices>
+                            </ui-select>
                             <br>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label class="control-label">Стадия преступления    <span class="required">*</span></label><br>
+                            <label class="control-label">Стадия преступления<span class="required">*</span></label><br>
                             <select required ng-options="stage.id as stage.name_ru for stage in judgment.article24"
                                     class="form-control" ng-model="item.stage"
                                     style="height: 34px; width: 100%">
@@ -144,10 +162,10 @@
 
                     <br>
                     <div class="row text-center">
-                        <button ng-disabled="!item.stage" ng-show="showSendBtn" ng-click="sendRequest(item)" class="btn btn-primary">Отправить
+                        <button ng-disabled="!item.stage" ng-show="showSendBtn" ng-click="sendRequest(item, singleDemo)" class="btn btn-primary">Отправить
                             запрос
                         </button>
-                        <button ng-disabled="!item" class="btn btn-danger" ng-click="clearForm(item)">Очистить форму</button>
+                        <button ng-disabled="!item" class="btn btn-danger" ng-click="clearForm(item, singleDemo)">Очистить форму</button>
                     </div>
                 </div>
             </form>

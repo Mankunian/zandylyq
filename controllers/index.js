@@ -1,4 +1,4 @@
-var myApp = angular.module('app', ['ui.bootstrap', 'ngSanitize']);
+var myApp = angular.module('app', ['ui.bootstrap', 'ngSanitize', 'ui.select']);
 
 angular.module('app').filter('trusted', function ($sce) {
     return function (html) {
@@ -7,7 +7,6 @@ angular.module('app').filter('trusted', function ($sce) {
 });
 
 angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, $uibModal, $log) {
-
 
     $scope.showSendBtn = true;
     $scope.getCrimeStageList = function () {
@@ -53,13 +52,18 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
         })
     };*/
 
+
+    $scope.singleDemo = {};
+    $scope.singleDemo.crime = '';
     $scope.getCrimeList = function () {
         $http({
             url: 'http://api.zandylyq.kz/v1/judgment/',
             method: 'GET'
         }).then(function (data) {
             console.log(data);
-            $scope.crimeList = data.data
+            $scope.crimeList = data.data;
+
+            localStorage.setItem("crimeList", JSON.stringify($scope.crimeList.articles));
         }, function (error) {
             console.log(error)
         })
@@ -67,8 +71,9 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
     $scope.getCrimeList();
 
 
-    $scope.sendRequest = function (value) {
+    $scope.sendRequest = function (value, singleDemo) {
         console.log(value);
+        console.log(singleDemo);
 
         $scope.dataSentByModal = value;
         var modalInstance = $uibModal.open({
@@ -82,10 +87,10 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
                 },
                 serverURL: function () {
                     return $scope.serverURL;
-                }/*,
+                },
                 article: function () {
-                    return $scope.equalCrime
-                }*/
+                    return singleDemo.crime
+                }
             }
         });
 
@@ -101,12 +106,11 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
         };
     };
 
-    $scope.clearForm = function (value) {
+    $scope.clearForm = function (value, crimeList) {
 
-        console.log(value.crime);
+        console.log(crimeList);
         $scope.crimeList = '';
         value.searchByNumber = '';
-        value.crime = '';
         value.gender = '';
         value.age = '';
         value.soft = '';
@@ -116,20 +120,15 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
         $scope.typeMessage = false;
 
         $scope.getCrimeList();
-        $scope.item = {}
+        $scope.item = {};
+        crimeList.crime = {};
     }
 
 
 });
 
 
-var modalContent = function ($scope, $uibModalInstance, $http, value) {
-
-    /* angular.forEach(article, function (value) {
-         $scope.articleId = value.id
-     });*/
-
-    console.log(value);
+var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
 
     var d = value.dateFrom;
     var mm = ((d.getMonth() < +1) < 10 ? '0' : '') + (d.getMonth() + 1);
@@ -143,8 +142,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value) {
     $scope.loader = false;
     $scope.getResponse = function () {
         var sendBodyObj = {
-            // 'article_id': +value.searchByNumber,
-            'article_id': value.crime,
+            'article_id': article.id,
             'crime_date': myDateString,
             'article24_id': +value.stage,
             'gender': +value.gender,
@@ -165,7 +163,6 @@ var modalContent = function ($scope, $uibModalInstance, $http, value) {
                 'Access-Control-Allow-Origin': true,
                 'Content-Type': 'application/json; charset=utf-8',
                 "X-Requested-With": "XMLHttpRequest"
-                //"Cache-control": "no-cache"
             }
         }).then(function (data) {
             $scope.data = data;
@@ -184,18 +181,5 @@ var modalContent = function ($scope, $uibModalInstance, $http, value) {
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss();
-        /* $scope.crimeList = '';
-         $scope.showSendBtn = true;
-         $scope.showClearBtn = false;
-         value.searchByNumber = '';
-         value.crime = '';
-         value.gender = '';
-         value.age = '';
-         value.soft = '';
-         value.heavy = '';
-         value.stage = {};
-         value.dateFrom = '';
-         $scope.typeMessage = false;*/
-
     };
 };
