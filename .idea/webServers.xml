@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b7c4e459-603a-4698-bf6a-740c54fe0e58" name="host" url="http://ec2-13-229-131-232.ap-southeast-1.compute.amazonaws.com">
+        <fileTransfer host="ec2-13-229-131-232.ap-southeast-1.compute.amazonaws.com" port="22" privateKey="C:\Users\Dias\Downloads\my-key-pair.ppk" rootFolder="/home/ec2-user" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
