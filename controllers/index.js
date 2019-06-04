@@ -150,6 +150,8 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
             'soft': value.soft ? 1 : 0,
             'heavy': value.heavy ? 1 : 0
         };
+
+        console.log(sendBodyObj);
         $scope.loader = true;
         $http({
             url: 'http://api.zandylyq.kz/v1/judgment/request/?&nocache=2',
@@ -167,6 +169,9 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
         }).then(function (data) {
             $scope.data = data;
             $scope.typeMessage = data.data;
+            if ($scope.typeMessage.error_message){
+                $scope.errorMessage = 'Заполните пожалуйста все поля!'
+            }
             $scope.showClearBtn = true;
             $scope.showSendBtn = false;
             $scope.loader = false;

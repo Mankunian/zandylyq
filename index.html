@@ -178,7 +178,7 @@
 
                     <br>
                     <div class="row text-center">
-                        <button ng-disabled="!item.stage" ng-show="showSendBtn" ng-click="sendRequest(item, singleDemo)" class="btn btn-primary">Отправить
+                        <button ng-disabled="!item.stage && singleDemo" ng-show="showSendBtn" ng-click="sendRequest(item, singleDemo)" class="btn btn-primary">Отправить
                             запрос
                         </button>
                         <button ng-disabled="!item" class="btn btn-danger" ng-click="clearForm(item, singleDemo)">Очистить форму</button>
@@ -208,8 +208,8 @@
                 </div>
             </div>
 
-            <div ng-if="typeMessage.error_message" class="alert alert-danger" role="alert">
-                {{typeMessage.error_message}}
+            <div ng-if="errorMessage" class="alert alert-danger" role="alert">
+                {{errorMessage}}
             </div>
 
             <div ng-if="typeMessage.result">
