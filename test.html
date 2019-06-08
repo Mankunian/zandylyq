@@ -42,7 +42,8 @@
         }
     </style>
 
-    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <!--<script src="https://cdn.zingchart.com/zingchart.min.js"></script>-->
+    <script src="Scripts/zingchart.min.js"></script>
     <style>
         .zc-ref {
             display: none;
@@ -97,9 +98,13 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="background">
-        <div class="col-xs-8 center-block" style="float: none">
+    <div class="background row">
+        <div class="col-sm-6" style="">
             <div id='myChart'></div>
+        </div>
+
+        <div class="col-sm-6">
+            <div id='pieChart'></div>
         </div>
         <script>
 
@@ -107,7 +112,7 @@
 
             angular.module("app").controller("graphCtrl", function ($scope, $http, $timeout, $uibModal, $log) {
 
-                $scope.getData = function () {
+                $scope.lineChart = function () {
                     var object = {
                         "article_id": "1880002",
                         "article24_id": "3",
@@ -308,13 +313,105 @@
                         zingchart.render({
                             id: 'myChart',
                             data: myConfig
+                            // height: 500,
+                            // width: 600
                         });
 
                     }, function (reason) {
                         console.log(reason)
                     })
                 };
-                $scope.getData();
+                $scope.lineChart();
+
+                $scope.pieChart = function () {
+                    var myConfig = {
+                        type: "pie",
+                        backgroundColor: "#003849",
+                        // "background-color": "#003849",
+                        plot: {
+                            borderColor: "#fff",
+                            borderWidth: 5,
+                            // slice: 90,
+                            valueBox: {
+                                placement: 'out',
+                                text: '%t\n%npv%',
+                                fontFamily: "Open Sans"
+                            },
+                            tooltip:{
+                                fontSize: '18',
+                                fontFamily: "Open Sans",
+                                padding: "5 10",
+                                text: "%npv%"
+                            },
+                            animation:{
+                                effect: 2,
+                                method: 5,
+                                speed: 500,
+                                sequence: 1
+                            }
+                        },
+                        source: {
+                            text: 'gs.statcounter.com',
+                            fontColor: "#8e99a9",
+                            fontFamily: "Open Sans"
+                        },
+                        title: {
+                            fontColor: "#fff",
+                            text: 'Global Browser Usage',
+                            align: "left",
+                            offsetX: 10,
+                            fontFamily: "Open Sans",
+                            fontSize: 20
+                        },
+                        subtitle: {
+                            offsetX: 10,
+                            offsetY: 10,
+                            fontColor: "#8e99a9",
+                            fontFamily: "Open Sans",
+                            fontSize: "13",
+                            text: 'May 2016',
+                            align: "left"
+                        },
+                        plotarea: {
+                            // margin: "20 0 0 0"
+                        },
+                        series : [
+                            {
+                                values : [11.38],
+                                text: "Internet Explorer",
+                                backgroundColor: '#50ADF5'
+                            },
+                            {
+                                values: [56.94],
+                                text: "Chrome",
+                                backgroundColor: '#FF7965'
+                            },
+                            {
+                                values: [14.52],
+                                text: 'Firefox',
+                                backgroundColor: '#FFCB45'
+                            },
+                            {
+                                text: 'Safari',
+                                values: [9.69],
+                                backgroundColor: '#6877e5'
+                            },
+                            {
+                                text: 'Other',
+                                values: [7.48],
+                                backgroundColor: '#6FB07F'
+                            }
+                        ]
+                    };
+
+                    zingchart.render({
+                        id : 'pieChart',
+                        data : myConfig
+                        // height: 500,
+                        // width: 600
+                    });
+                };
+                $scope.pieChart();
 
             });
 
