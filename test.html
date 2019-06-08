@@ -138,8 +138,19 @@
                         $scope.cntLic = [];
                         angular.forEach($scope.data, function (row, index) {
                             $scope.typeOfPunishment.push(row.VidNakaz);
-                            $scope.cntLic.push(row.cntLic)
+                            $scope.cntLic.push(+row.cntLic)
                         });
+
+                        $scope.cntLic.reduce(function (acc, value) {
+                            return acc + value;
+                        }, 0);
+
+
+                        $scope.totalSum = $scope.cntLic.reduce(addSum, 0);
+
+                        function addSum(a, b) {
+                            return a + b;
+                        }
                         ZC.LICENSE = ["b55b025e438fa8a98e32482b5f768ff5"];
                         zingchart.THEME = "classic";
                         var myConfig = {
@@ -233,7 +244,7 @@
                                     "font-color": "#f6f7f8"
                                 },
                                 "label": {
-                                    "text": "Всего лиц - 237",
+                                    "text": "Всего лиц:" + $scope.totalSum,
                                     "font-color": "#f6f7f8"
                                 },
                                 "minor-ticks": 0,

@@ -21,37 +21,6 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
         })
     };
     $scope.getCrimeStageList();
-/**/
-    /*$scope.equalCrime = [];
-    $scope.getCrimeBySearch = function (search) {
-        console.log(search);
-        $http({
-            url: 'http://api.zandylyq.kz/v1/judgment/search-qualif-by-stat/',
-            method: 'POST',
-            data: {qualif_name: $scope.item.searchByNumber}
-        }).then(function (data) {
-            angular.forEach(data.data, function (value) {
-                $scope.crimeList = value;
-
-
-                angular.forEach(value, function (item) {
-                    // console.log(item.stat);
-                    // console.log(search.searchByNumber);
-                    var crimeItem = {};
-                    if (search.searchByNumber === item.stat) {
-                        crimeItem.id = item.id;
-                        crimeItem.label = item.stat;
-                        $scope.equalCrime.push(crimeItem)
-                    }
-                    // console.log($scope.equalCrime)
-
-                })
-            });
-        }, function (error) {
-            console.log(error)
-        })
-    };*/
-
 
     $scope.singleDemo = {};
     $scope.singleDemo.crime = '';
