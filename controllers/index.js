@@ -21,7 +21,7 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
         })
     };
     $scope.getCrimeStageList();
-
+/**/
     /*$scope.equalCrime = [];
     $scope.getCrimeBySearch = function (search) {
         console.log(search);
