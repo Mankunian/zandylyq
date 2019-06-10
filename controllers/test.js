@@ -44,6 +44,7 @@ angular.module("app").controller("graphCtrl", function ($scope, $http, $timeout,
             function addSum(a, b) {
                 return a + b;
             }
+
             ZC.LICENSE = ["b55b025e438fa8a98e32482b5f768ff5"];
             zingchart.THEME = "classic";
             var myConfig = {
@@ -212,92 +213,114 @@ angular.module("app").controller("graphCtrl", function ($scope, $http, $timeout,
     $scope.lineChart();
 
     $scope.pieChart = function () {
-        var myConfig = {
-            type: "pie",
-            backgroundColor: "#003849",
-            // "background-color": "#003849",
-            plot: {
-                borderColor: "#fff",
-                borderWidth: 5,
-                // slice: 90,
-                valueBox: {
-                    placement: 'out',
-                    text: '%t\n%npv%',
-                    fontFamily: "Open Sans"
-                },
-                tooltip:{
-                    fontSize: '18',
-                    fontFamily: "Open Sans",
-                    padding: "5 10",
-                    text: "%npv%"
-                },
-                animation:{
-                    effect: 2,
-                    method: 5,
-                    speed: 500,
-                    sequence: 1
-                }
-            },
-            source: {
-                text: 'gs.statcounter.com',
-                fontColor: "#8e99a9",
-                fontFamily: "Open Sans"
-            },
-            title: {
-                fontColor: "#fff",
-                text: 'Global Browser Usage',
-                align: "left",
-                offsetX: 10,
-                fontFamily: "Open Sans",
-                fontSize: 20
-            },
-            subtitle: {
-                offsetX: 10,
-                offsetY: 10,
-                fontColor: "#8e99a9",
-                fontFamily: "Open Sans",
-                fontSize: "13",
-                text: 'May 2016',
-                align: "left"
-            },
-            plotarea: {
-                // margin: "20 0 0 0"
-            },
-            series : [
-                {
-                    values : [11.38],
-                    text: "Internet Explorer",
-                    backgroundColor: '#50ADF5'
-                },
-                {
-                    values: [56.94],
-                    text: "Chrome",
-                    backgroundColor: '#FF7965'
-                },
-                {
-                    values: [14.52],
-                    text: 'Firefox',
-                    backgroundColor: '#FFCB45'
-                },
-                {
-                    text: 'Safari',
-                    values: [9.69],
-                    backgroundColor: '#6877e5'
-                },
-                {
-                    text: 'Other',
-                    values: [7.48],
-                    backgroundColor: '#6FB07F'
-                }
-            ]
+
+        var object = {
+            "article_id": "1880002",
+            "article24_id": "3",
+            "gender": 2,
+            "age": 27,
+            "soft": 0,
+            "heavy": 0
         };
 
-        zingchart.render({
-            id : 'pieChart',
-            data : myConfig
-            // height: 500,
-            // width: 600
+        $http({
+            method: 'POST',
+            url: 'http://api.zandylyq.kz/v1/stat/vid-nakaz/',
+            data: object,
+            cache: false,
+            contentType: false,
+            async: true,
+            processData: false,
+            headers: {
+                'Access-Control-Allow-Origin': true,
+                'Content-Type': 'application/json; charset=utf-8',
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        }).then(function (value) {
+            var series = [];
+            var i = 0;
+            var color = ['#50ADF5', '#13c632', '#FFCB45', '#6877e5', '#6FB07F'];
+            $scope.data = value.data.result;
+            console.log($scope.data);
+            angular.forEach($scope.data, function (value) {
+                var obj = {
+                    values: [+value.cntLic],
+                    text: value.VidNakaz,
+                    backgroundColor: color[i]
+                };
+                series.push(obj);
+                console.log(obj);
+                i++;
+            });
+
+            var myConfig = {
+                type: "pie",
+                backgroundColor: "#003849",
+                // "background-color": "#003849",
+                plot: {
+                    borderColor: "#fff",
+                    borderWidth: 5,
+                    // slice: 90,
+                    valueBox: {
+                        placement: 'out',
+                        // text: '%t\n%npv%',
+                        text: '%t\n%v',
+                        fontFamily: "Open Sans"
+                    },
+                    tooltip: {
+                        fontSize: '18',
+                        fontFamily: "Open Sans",
+                        padding: "5 10",
+                        text: "%v"
+                    },
+                    animation: {
+                        effect: 2,
+                        method: 5,
+                        speed: 500,
+                        sequence: 1
+                    }
+                },
+                source: {
+                    // text: 'gs.statcounter.com',
+                    fontColor: "#8e99a9",
+                    fontFamily: "Open Sans"
+                },
+                title: {
+                    fontColor: "#fff",
+                    text: 'Вид и сроки наказания',
+                    align: "center",
+                    offsetX: 10,
+                    fontFamily: "Open Sans",
+                    fontSize: 25,
+                    backgroundColor: "none"
+                },
+                subtitle: {
+                    offsetX: 10,
+                    offsetY: 10,
+                    fontColor: "#8e99a9",
+                    fontFamily: "Open Sans",
+                    fontSize: "13",
+                    text: 'Кол-во лиц',
+                    align: "left"
+                },
+                plotarea: {
+                    // margin: "20 0 0 0"
+                },
+                series: series
+            };
+
+            zingchart.render({
+                id: 'pieChart',
+                data: myConfig
+                // height: 500,
+                // width: 600
+            });
+        }, function (reason) {
+            console.log(reason)
         });
+
+
+
     };
     $scope.pieChart();
 
