@@ -3,6 +3,12 @@ body{
     overflow: auto;
 }
 
+a.navbar-brand{
+    font-family: initial;
+    font-weight: 600;
+    font-size: x-large;
+}
+
 img.logo{
     float: left;
     width: 44px;
