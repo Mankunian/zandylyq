@@ -138,6 +138,9 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
         }).then(function (data) {
             $scope.data = data;
             $scope.typeMessage = data.data;
+            if ($scope.typeMessage.error_message) {
+                $scope.typeMessage.error_message = 'Пожалуйста, заполните поля где отмечены знаком *'
+            }
             $scope.showClearBtn = true;
             $scope.showSendBtn = false;
             $scope.loader = false;
@@ -149,27 +152,29 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
     };
     $scope.getResponse();
 
-    $scope.showChart = function () {
 
+    $scope.showTable = false;
+    $scope.showChart = function () {
+        // $scope.showTable = true;
         console.log($scope.objForChart);
 
-        /* var object = {
-             "article_id": $scope.objForChart.article_id,
-             "article24_id": $scope.objForChart.article24_id,
-             "gender": $scope.objForChart.gender,
-             "age": $scope.objForChart.age,
-             "soft": $scope.objForChart.soft,
-             "heavy": $scope.objForChart.heavy
-         };*/
-
         var object = {
+            "article_id": $scope.objForChart.article_id,
+            "article24_id": $scope.objForChart.article24_id,
+            "gender": $scope.objForChart.gender,
+            "age": $scope.objForChart.age,
+            "soft": $scope.objForChart.soft,
+            "heavy": $scope.objForChart.heavy
+        };
+
+        /*var object = {
             "article_id": "1880002",
             "article24_id": "3",
             "gender": 2,
             "age": 27,
             "soft": 0,
             "heavy": 0
-        };
+        };*/
 
         $http({
             method: 'POST',
@@ -280,6 +285,8 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
                     // height: 500,
                     // width: 600
                 });
+
+                $scope.hideBtn = false;
             }
         }, function (reason) {
             console.log(reason)
