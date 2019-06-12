@@ -250,14 +250,16 @@
                 <span ng-bind-html="typeMessage.result | trusted"></span>
             </div>
 
-            <button ng-if="typeMessage.result" ng-click="showChart(item)" type="button" class="btn btn-primary">Показать аналитику</button>
+            <!--<button ng-if="typeMessage.result" ng-click="showChart(item)" type="button" class="btn btn-primary">Показать аналитику</button>-->
+            <button ng-if="typeMessage.result" ng-click="lineChart(item)" type="button" class="btn btn-primary">Показать аналитику</button>
             <span>
                 <div ng-if="noData" class="alert alert-danger" role="alert">
                 <strong>{{noData}}</strong>
             </div>
             </span>
 
-            <div style="margin: 10px 0" ng-if="!noData" id='pieChart'></div>
+            <!--<div style="margin: 10px 0" ng-if="!noData" id='pieChart'></div>-->
+            <div style="margin: 10px 0" ng-if="!noData" id='myChart'></div>
 
             <div ng-show="showTable" class="panel panel-primary filterable">
                 <div class="panel-heading">
