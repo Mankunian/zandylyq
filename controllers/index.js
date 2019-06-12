@@ -281,9 +281,9 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
 
                 zingchart.render({
                     id: 'pieChart',
-                    data: myConfig
+                    data: myConfig,
                     // height: 500,
-                    // width: 600
+                    width: '100%'
                 });
 
                 $scope.hideBtn = false;
