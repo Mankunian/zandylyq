@@ -500,10 +500,12 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
             });
 
 
-            zingchart.click = function(data){
-                // alert("Chart Clicked - ID: " + data["id"]);
-                console.log(data)
+            zingchart.node_click = function(config) {
+                /*отправить эти 2 параметра чтобы получить список для таблицы*/
+                console.log(config.value);
+                console.log(config.scaletext);
             }
+
 
         }, function (reason) {
             console.log(reason)
