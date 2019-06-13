@@ -500,11 +500,19 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
             });
 
 
-            zingchart.node_click = function(config) {
+            $scope.callTable = [];
+            zingchart.node_click = function (config) {
                 /*отправить эти 2 параметра чтобы получить список для таблицы*/
                 console.log(config.value);
                 console.log(config.scaletext);
-            }
+
+                var item = {};
+                item.id = config.value;
+                item.label = config.scaletext;
+                $scope.callTable.push(item)
+            };
+
+            console.log($scope.callTable);
 
 
         }, function (reason) {
