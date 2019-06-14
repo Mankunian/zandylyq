@@ -221,3 +221,11 @@ img.logo{
 .filterable .filters input[disabled]:-ms-input-placeholder {
     color: #333;
 }
+
+
+/*table*/
+.table{
+    width: 100%;
+    display: block;
+    overflow-x: scroll;
+}

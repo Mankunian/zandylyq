@@ -30,6 +30,9 @@
     <!--uiSelect-->
 
 
+    <!--FileSaver-->
+    <script src="Scripts/FileSaver.js"></script>
+
     <style>
         .select2 > .select2-choice.ui-select-match {
             /* Because of the inclusion of Bootstrap */
@@ -275,30 +278,30 @@
                         <!--<th><input type="text" class="form-control" placeholder="First Name" disabled></th>-->
                         <!--<th><input type="text" class="form-control" placeholder="Last Name" disabled></th>-->
                         <!--<th><input type="text" class="form-control" placeholder="Username" disabled></th>-->
-                        <th>Номер дела в суде</th>
+                        <th>ФИО</th>
+                        <!--<th>Отчество</th>-->
+                        <!--<th>Имя</th>-->
+                        <th>Вид наказания</th>
+                        <th>Срок наказания</th>
+                        <!--<th>Файл</th>-->
+                        <th>Ссылка</th>
                         <th>Суд</th>
-                        <th>Фамилия осужденного</th>
-                        <th>Год осужденного</th>
+                        <th>№ суда</th>
+                        <th>№ удост</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>11-2018</td>
-                        <td>Сарыаркинский</td>
-                        <td>Иванов</td>
-                        <td>2018</td>
-                    </tr>
-                    <tr>
-                        <td>12-2018</td>
-                        <td>Алматинский</td>
-                        <td>Петров</td>
-                        <td>2018</td>
-                    </tr>
-                    <tr>
-                        <td>14-2018</td>
-                        <td>Кокшетау</td>
-                        <td>Сидоров</td>
-                        <td>2017</td>
+                    <tbody >
+                    <tr ng-repeat="item in tableData">
+                        <td>{{item.Family}} {{item.LName}} {{item.Name}}</td>
+                        <!--<td>{{item.LName}}</td>-->
+                        <!--<td>{{item.Name}}</td>-->
+                        <td>{{item.VidNakaz}}</td>
+                        <td>{{item.dRes}}</td>
+                        <!--<td>{{item.file_id}}</td>-->
+                        <td><div ng-click="downloadFile(item)"><a>{{item.file_url}}</a></div></td>
+                        <td>{{item.nSud}}</td>
+                        <td>{{item.numSUD}}</td>
+                        <td>{{item.numUD}}</td>
                     </tr>
                     </tbody>
                 </table>

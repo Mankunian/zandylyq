@@ -294,14 +294,25 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
     };
 
     $scope.lineChart = function () {
+
         var object = {
+            "article_id": $scope.objForChart.article_id,
+            "article24_id": $scope.objForChart.article24_id,
+            "gender": $scope.objForChart.gender,
+            "age": $scope.objForChart.age,
+            "soft": $scope.objForChart.soft,
+            "heavy": $scope.objForChart.heavy
+        };
+
+
+        /*var object = {
             "article_id": "1880002",
             "article24_id": "3",
             "gender": 2,
             "age": 27,
             "soft": 0,
             "heavy": 0
-        };
+        };*/
 
 
         $http({
@@ -370,26 +381,6 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
                     }
                 },
                 "scale-x": {
-                    // "min-value": 1383292800000,
-                    // "shadow": 0,
-                    // "step": 3600000,
-                    /*"values": [
-                         "штраф 200 МРА",
-                         "общ.раб.200 час.",
-                         "общ.раб.250 час.",
-                         "общ.раб.300 час.",
-                         "общ.раб.600 час.",
-                         "штраф 200 МРА",
-                         "общ.раб.200 час.",
-                         "общ.раб.250 час.",
-                         "общ.раб.300 час.",
-                         "общ.раб.600 час.",
-                         "штраф 200 МРА",
-                         "общ.раб.200 час.",
-                         "общ.раб.250 час.",
-                         "общ.раб.300 час.",
-                         "общ.раб.600 час."
-                    ],*/
                     "values": $scope.typeOfPunishment,
                     "line-color": "#f6f7f8",
                     "tick": {
@@ -401,16 +392,6 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
                     "item": {
                         "font-color": "#f6f7f8"
                     },
-                    /*"transform": {
-                        "type": "date",
-                        "all": "%D, %d %M<br />%h:%i %A",
-                        "guide": {
-                            "visible": false
-                        },
-                        "item": {
-                            "visible": false
-                        }
-                    },*/
                     "label": {
                         "visible": true
                     },
@@ -503,23 +484,65 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
             $scope.callTable = [];
             zingchart.node_click = function (config) {
                 /*отправить эти 2 параметра чтобы получить список для таблицы*/
-                console.log(config.value);
+                // console.log(config.value);
                 console.log(config.scaletext);
 
-                var item = {};
-                item.id = config.value;
-                item.label = config.scaletext;
-                $scope.callTable.push(item)
+                var tableObj = {
+                    "article_id": $scope.objForChart.article_id,
+                    "article24_id": $scope.objForChart.article24_id,
+                    "gender": $scope.objForChart.gender,
+                    "age": $scope.objForChart.age,
+                    "soft": $scope.objForChart.soft,
+                    "heavy": $scope.objForChart.heavy,
+                    "VidNakaz": config.scaletext
+                };
+                console.log(tableObj);
+
+                $http({
+                    method: 'POST',
+                    url: 'http://api.zandylyq.kz/v1/stat/vid-nakaz-list/',
+                    data: tableObj,
+                    cache: false,
+                    contentType: false,
+                    async: true,
+                    processData: false,
+                    headers: {
+                        'Access-Control-Allow-Origin': true,
+                        'Content-Type': 'application/json; charset=utf-8',
+                        "X-Requested-With": "XMLHttpRequest"
+                    }
+                }).then(function (value) {
+                    console.log(value);
+                    $scope.showTable = true;
+                    $scope.tableData = value.data.result;
+                }, function (reason) {
+                    console.log(reason)
+                })
+
+
             };
-
-            console.log($scope.callTable);
-
 
         }, function (reason) {
             console.log(reason)
         })
     };
     // $scope.lineChart();
+
+    $scope.downloadFile = function (item) {
+        console.log(item);
+        $http({
+            method: 'GET',
+            url: 'http://api.zandylyq.kz/v1/file/download/' + item.file_id,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).success(function (response) {
+            var file = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+            saveAs(file, 'filename.docx');
+        }).error(function (data) {
+
+        })
+    };
 
 
     $scope.cancel = function () {
