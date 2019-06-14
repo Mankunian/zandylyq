@@ -534,11 +534,11 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
             method: 'GET',
             url: 'http://api.zandylyq.kz/v1/file/download/' + item.file_id,
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
             }
         }).success(function (response) {
             var file = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-            saveAs(file, 'filename.docx');
+            // saveAs(file, 'filename.docx');
         }).error(function (data) {
 
         })

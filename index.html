@@ -233,7 +233,7 @@
             <h4 class="modal-title" id="exampleModalLabel">Результат анализа</h4>
         </div>
 
-        <div class="modal-body">
+        <div class="modal-body" id="printThis">
 
             <!-- Preloader -->
             <div ng-show="loader" id="Load" class="load">
@@ -278,30 +278,24 @@
                         <!--<th><input type="text" class="form-control" placeholder="First Name" disabled></th>-->
                         <!--<th><input type="text" class="form-control" placeholder="Last Name" disabled></th>-->
                         <!--<th><input type="text" class="form-control" placeholder="Username" disabled></th>-->
+                        <th>Дата приговора</th>
+                        <th>Наименование суда</th>
+                        <th>№ дела суда</th>
+                        <th>№ УД</th>
                         <th>ФИО</th>
-                        <!--<th>Отчество</th>-->
-                        <!--<th>Имя</th>-->
+                        <!--<th>Ссылка</th>-->
                         <th>Вид наказания</th>
-                        <th>Срок наказания</th>
-                        <!--<th>Файл</th>-->
-                        <th>Ссылка</th>
-                        <th>Суд</th>
-                        <th>№ суда</th>
-                        <th>№ удост</th>
                     </tr>
                     </thead>
                     <tbody >
                     <tr ng-repeat="item in tableData">
-                        <td>{{item.Family}} {{item.LName}} {{item.Name}}</td>
-                        <!--<td>{{item.LName}}</td>-->
-                        <!--<td>{{item.Name}}</td>-->
-                        <td>{{item.VidNakaz}}</td>
                         <td>{{item.dRes}}</td>
-                        <!--<td>{{item.file_id}}</td>-->
-                        <td><div ng-click="downloadFile(item)"><a>{{item.file_url}}</a></div></td>
                         <td>{{item.nSud}}</td>
                         <td>{{item.numSUD}}</td>
                         <td>{{item.numUD}}</td>
+                        <td><div ng-click="downloadFile(item)"><a href="{{item.file_url}}">{{item.Family}} {{item.LName}} {{item.Name}}</a></div></td>
+                        <td>{{item.VidNakaz}}</td>
+                        <!--<td><div ng-click="downloadFile(item)"><a href="{{item.file_url}}">{{item.file_url}}</a></div></td>-->
                     </tr>
                     </tbody>
                 </table>
@@ -309,7 +303,7 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-danger" ng-click="cancel()">Закрыть</button>
-            <!--<button class="btn btn-primary" ng-click="printToPdf()">Печать</button>-->
+            <!--<button class="btn btn-primary" id="btnPrint">Печать</button>-->
         </div>
 
     </div>
@@ -363,6 +357,27 @@ Please consider that the JS part isn't production ready at all, I just code it t
         });
     });
 </script>
+<!--<script>
+    document.getElementById("btnPrint").onclick = function () {
+        printElement(document.getElementById("printThis"));
+    };
+
+    function printElement(elem) {
+        var domClone = elem.cloneNode(true);
+
+        var $printSection = document.getElementById("printSection");
+
+        if (!$printSection) {
+            var $printSection = document.createElement("div");
+            $printSection.id = "printSection";
+            document.body.appendChild($printSection);
+        }
+
+        $printSection.innerHTML = "";
+        $printSection.appendChild(domClone);
+        window.print();
+    }
+</script>-->
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
