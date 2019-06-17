@@ -345,6 +345,8 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article, s
                 $scope.cntLic.push(+row.cntLic)
             });
 
+            console.log($scope.cntLic);
+
             $scope.cntLic.reduce(function (acc, value) {
                 return acc + value;
             }, 0);
@@ -459,7 +461,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article, s
                 },
                 "series": [{
                     // "values": [15, 25, 10, 5, 38, 30, 11, 15, 20, 22, 17, 28, 39, 40, 27],
-                    "values": $scope.cntLic.sort(),
+                    "values": $scope.cntLic,
                     "text": "Кол-во лиц",
                     "line-color": "#007790",
                     "legend-marker": {
