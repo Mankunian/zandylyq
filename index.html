@@ -262,7 +262,12 @@
             </span>
 
             <!--<div style="margin: 10px 0" ng-if="!noData" id='pieChart'></div>-->
-            <div style="margin: 10px 0" ng-if="!noData" id='myChart'></div>
+            <div id="tooltip" ng-if="tooltip">
+                <p>*Для получения списка нажмите точку на графике</p>
+            </div>
+            <div style="margin: 10px 0" ng-if="data" id='myChart'></div>
+
+
 
             <div ng-show="showTable" class="panel panel-primary filterable">
                 <div class="panel-heading">

@@ -331,6 +331,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
         }).then(function (value) {
             console.log(value);
             $scope.data = value.data.result;
+            $scope.tooltip = value.data.result;
             $scope.typeOfPunishment = [];
             $scope.cntLic = [];
             angular.forEach($scope.data, function (row, index) {

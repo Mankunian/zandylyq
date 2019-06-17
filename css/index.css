@@ -229,3 +229,10 @@ img.logo{
     display: block;
     overflow-x: scroll;
 }
+
+#tooltip {
+    color: red;
+    font-style: italic;
+    font-weight: 600;
+    font-size: small;
+}
