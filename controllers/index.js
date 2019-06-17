@@ -40,9 +40,11 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
     $scope.getCrimeList();
 
 
-    $scope.sendRequest = function (value, singleDemo) {
+    $scope.selectedStage = '3';
+    $scope.sendRequest = function (value, singleDemo, selectedStage) {
         console.log(value);
         console.log(singleDemo);
+        console.log(selectedStage);
 
         $scope.dataSentByModal = value;
         var modalInstance = $uibModal.open({
@@ -59,7 +61,11 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
                 },
                 article: function () {
                     return singleDemo.crime
+                },
+                stage: function () {
+                    return selectedStage
                 }
+
             }
         });
 
@@ -97,7 +103,7 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
 });
 
 
-var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
+var modalContent = function ($scope, $uibModalInstance, $http, value, article, stage) {
 
     var d = value.dateFrom;
     var mm = ((d.getMonth() < +1) < 10 ? '0' : '') + (d.getMonth() + 1);
@@ -113,7 +119,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article) {
         var sendBodyObj = {
             'article_id': article.id,
             'crime_date': myDateString,
-            'article24_id': +value.stage,
+            'article24_id': +stage,
             'gender': +value.gender,
             'age': +value.age,
             'soft': value.soft ? 1 : 0,

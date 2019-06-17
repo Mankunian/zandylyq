@@ -202,7 +202,7 @@
                         <div class="col-sm-12">
                             <label class="control-label">Стадия преступления<span class="required">*</span></label><br>
                             <select required ng-options="stage.id as stage.name_ru for stage in judgment.article24"
-                                    class="form-control" ng-model="item.stage"
+                                    class="form-control" ng-model="selectedStage"
                                     style="height: 34px; width: 100%">
                                 <option selected disabled value="" ng-show="false"></option>
                             </select>
@@ -211,7 +211,7 @@
 
                     <br>
                     <div class="row text-center">
-                        <button ng-show="showSendBtn" ng-click="sendRequest(item, singleDemo)" class="btn btn-primary">
+                        <button ng-show="showSendBtn" ng-click="sendRequest(item, singleDemo, selectedStage)" class="btn btn-primary">
                             Отправить
                             запрос
                         </button>
@@ -262,11 +262,11 @@
             </span>
 
             <!--<div style="margin: 10px 0" ng-if="!noData" id='pieChart'></div>-->
+
+            <div style="margin: 10px 0" ng-if="data" id='myChart'></div>
             <div id="tooltip" ng-if="tooltip">
                 <p>*Для получения списка нажмите точку на графике</p>
             </div>
-            <div style="margin: 10px 0" ng-if="data" id='myChart'></div>
-
 
 
             <div ng-show="showTable" class="panel panel-primary filterable">
