@@ -463,7 +463,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article, s
                     // "values": [15, 25, 10, 5, 38, 30, 11, 15, 20, 22, 17, 28, 39, 40, 27],
                     "values": $scope.cntLic,
                     "text": "Кол-во лиц",
-                    "line-color": "#007790",
+                    "line-color": "#ff0000",
                     "legend-marker": {
                         "type": "circle",
                         "size": 5,
@@ -473,10 +473,10 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article, s
                         "border-color": "#69dbf1"
                     },
                     "marker": {
-                        "background-color": "#007790",
+                        "background-color": "#ffff00",
                         "border-width": 1,
                         "shadow": 0,
-                        "border-color": "#69dbf1"
+                        "border-color": "#ffff00"
                     }
                 }
                 ]
