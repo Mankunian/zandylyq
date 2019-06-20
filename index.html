@@ -211,7 +211,7 @@
 
                     <br>
                     <div class="row text-center">
-                        <button onclick="ym(52278073, 'reachGoal', 'zapros');" ng-show="showSendBtn" ng-click="sendRequest(item, singleDemo, selectedStage)" class="btn btn-primary">
+                        <button onclick="getYandexMetric()" ng-show="showSendBtn" ng-click="sendRequest(item, singleDemo, selectedStage)" class="btn btn-primary">
                             Отправить
                             запрос
                         </button>
@@ -365,27 +365,15 @@ Please consider that the JS part isn't production ready at all, I just code it t
         });
     });
 </script>
-<!--<script>
-    document.getElementById("btnPrint").onclick = function () {
-        printElement(document.getElementById("printThis"));
-    };
 
-    function printElement(elem) {
-        var domClone = elem.cloneNode(true);
 
-        var $printSection = document.getElementById("printSection");
-
-        if (!$printSection) {
-            var $printSection = document.createElement("div");
-            $printSection.id = "printSection";
-            document.body.appendChild($printSection);
-        }
-
-        $printSection.innerHTML = "";
-        $printSection.appendChild(domClone);
-        window.print();
+<script>
+    function getYandexMetric() {
+        console.log('it works!');
+        ym(53897173, 'reachGoal', 'zapros');
+        console.log(ym);
     }
-</script>-->
+</script>
 <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
