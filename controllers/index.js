@@ -339,6 +339,7 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article, s
         }).then(function (value) {
             console.log(value);
             $scope.data = value.data.result;
+            if ($scope.data === ''){$scope.noData = "Нет данных!"}
             $scope.tooltip = value.data.result;
             $scope.typeOfPunishment = [];
             $scope.cntLic = [];
