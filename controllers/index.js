@@ -42,9 +42,13 @@ angular.module("app").controller("mainCtrl", function ($scope, $http, $timeout, 
 
     $scope.selectedStage = '3';
     $scope.sendRequest = function (value, singleDemo, selectedStage) {
-        console.log(value);
-        console.log(singleDemo);
-        console.log(selectedStage);
+
+        ym(52278073, 'reachGoal', 'zapros');
+
+        console.log(ym);
+        // console.log(value);
+        // console.log(singleDemo);
+        // console.log(selectedStage);
 
         $scope.dataSentByModal = value;
         var modalInstance = $uibModal.open({
