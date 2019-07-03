@@ -81,7 +81,8 @@
         .background {
             margin: 0;
         }
-        .alert{
+
+        .alert {
             width: fit-content;
             padding: 6px 12px;
             display: inline-block;
@@ -91,8 +92,9 @@
 
 </head>
 <body ng-controller="mainCtrl">
+<!--
 <nav class="navbar navbar-default" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
+    &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
@@ -104,11 +106,11 @@
         <a class="navbar-brand" href="https://www.zandylyq.kz/">ZANDYLYQ</a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
+    &lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
             <li class="active"><a href="#">Проверка приговора</a></li>
-            <!--<li><a href="test.html">График</a></li>-->
+            &lt;!&ndash;<li><a href="test.html">График</a></li>&ndash;&gt;
         </ul>
         <div class="col-sm-3 col-md-3 hidden">
             <form class="navbar-form" role="search">
@@ -123,7 +125,7 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Настройки</a></li>
-            <!-- <li class="dropdown">
+            &lt;!&ndash; <li class="dropdown">
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Пользователь <b class="caret"></b></a>
                  <ul class="dropdown-menu">
                      <li><a href="#">Action</a></li>
@@ -132,31 +134,40 @@
                      <li class="divider"></li>
                      <li><a href="#">Separated link</a></li>
                  </ul>
-             </li>-->
+             </li>&ndash;&gt;
         </ul>
     </div>
 </nav>
+-->
 
 <div class="container-fluid main">
     <div class="row">
         <h2 class="text-center title" style="display: none;">ПРОВЕРКА ПРИГОВОРА</h2>
         <div class="form">
             <form>
-                <h3 class="text-center form-title">Расчет наказания</h3>
-                <div class="col-sm-12" style="margin: 15px 0">
-                    <div class="row">
-                        <div class="col-sm-3">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6" style="padding: 15px">
+                            <p class="title">Проверка приговора</p>
+                        </div>
+
+                        <div class="col-sm-6 text-right">
+                            <img src="img/logo.png" alt="logo" style="width: 150px">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-5">
                             <label class="control-label">Возраст <span class="required">*</span></label>
-                            <p class="subtitle">Укажите полный возраст на момент совершения преступления</p>
+
                             <input type="text" pattern="\d*" maxlength="2" class="form-control" ng-model="item.age"
                                    required>
+                            <br>
+                            <p class="subtitle">Укажите полный возраст на момент совершения преступления</p>
                         </div>
-                        <div class="col-sm-3">
-                            <label class="control-label">Пол <span class="required">*</span></label><br>
-                            <input ng-model="item.gender" type="radio" value='1' required> Мужской<br>
-                            <input ng-model="item.gender" type="radio" value='2'> Женский<br>
-                        </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-7">
                             <label class="control-label">Наличие смягчающих/отягчающих вину обстоятельств</label><br>
 
 
@@ -166,17 +177,29 @@
                             <label style="font-weight: 500" for="1">Отягчающие</label>
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-sm-12">
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6" style="color: #fff !important;">
+
+                            <label class="control-label">Пол <span class="required">*</span></label><br>
+                            <div>
+                                <input ng-model="item.gender" type="radio" value='1' required> Мужской<br>
+                                <input ng-model="item.gender" type="radio" value='2'> Женский<br>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
                             <label>Дата совершения правонарушения <span
                                     class="required">*</span></label>
                             <input class="form-control" data-format="dd.MM.yyyy" ng-model="item.dateFrom" type="date"
                                    style="width: max-content" required>
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
                         <div class="col-sm-12">
                             <label class="control-label"> Статья Уголовного кодекса
                                 <span class="required">*</span>
@@ -198,7 +221,10 @@
                             <br>
                         </div>
                     </div>
-                    <div class="row">
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
                         <div class="col-sm-12">
                             <label class="control-label">Стадия преступления<span class="required">*</span></label><br>
                             <select required ng-options="stage.id as stage.name_ru for stage in judgment.article24"
@@ -208,16 +234,18 @@
                             </select>
                         </div>
                     </div>
-
-                    <br>
-                    <div class="row text-center">
-                        <button onclick=" ym(53897173, 'reachGoal', 'zapros');" ng-show="showSendBtn" ng-click="sendRequest(item, singleDemo, selectedStage)" class="btn btn-primary">
-                            Отправить
-                            запрос
-                        </button>
-                        <button ng-disabled="!item" class="btn btn-danger" ng-click="clearForm(item, singleDemo)">
-                            Очистить форму
-                        </button>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            <button onclick=" ym(53897173, 'reachGoal', 'zapros');" ng-show="showSendBtn" ng-click="sendRequest(item, singleDemo, selectedStage)" class="btn btn-lg btn-primary">
+                                Связаться
+                            </button>
+                            <button ng-disabled="!item" class="btn btn-lg btn-danger" ng-click="clearForm(item, singleDemo)">
+                                Очистить форму
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -254,7 +282,9 @@
             </div>
 
             <!--<button ng-if="typeMessage.result" ng-click="showChart(item)" type="button" class="btn btn-primary">Показать аналитику</button>-->
-            <button ng-if="typeMessage.result" ng-click="lineChart(item)" type="button" class="btn btn-primary">Показать аналитику</button>
+            <button ng-if="typeMessage.result" ng-click="lineChart(item)" type="button" class="btn btn-primary">Показать
+                аналитику
+            </button>
             <span>
                 <div ng-if="noData" class="alert alert-danger" role="alert">
                 <strong>{{noData}}</strong>
