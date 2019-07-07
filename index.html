@@ -147,11 +147,11 @@
             <form>
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="col-sm-6" style="padding: 15px">
-                            <p class="title">Проверка приговора</p>
+                        <div class="col-sm-6" style="padding: 15px; text-align: center">
+                            <p class="title">Расчет наказания</p>
                         </div>
 
-                        <div class="col-sm-6 text-right">
+                        <div class="col-sm-6 text-center">
                             <img src="img/logo.png" alt="logo" style="width: 150px">
                         </div>
                     </div>
@@ -162,7 +162,8 @@
                         <div class="col-sm-5">
                             <label class="control-label">Возраст <span class="required">*</span></label>
 
-                            <input type="text" pattern="\d*" maxlength="2" class="form-control" ng-model="item.age"
+                            <input style="width: auto" type="text" pattern="\d*" maxlength="2" class="form-control"
+                                   ng-model="item.age"
                                    required>
                             <br>
                             <p class="subtitle">Укажите полный возраст на момент совершения преступления</p>
@@ -171,10 +172,14 @@
                             <label class="control-label">Наличие смягчающих/отягчающих вину обстоятельств</label><br>
 
 
-                            <input type="checkbox" id="2" ng-model="item.soft">
+                            <!--<input type="checkbox" id="2" ng-model="item.soft">
                             <label style="font-weight: 500" for="2">Смягчающие</label>
                             <input type="checkbox" id="1" ng-model="item.heavy">
-                            <label style="font-weight: 500" for="1">Отягчающие</label>
+                            <label style="font-weight: 500" for="1">Отягчающие</label>-->
+                            <input ng-model="item.soft" id="box1" type="checkbox"/>
+                            <label for="box1">Смягчающие</label>
+                            <input ng-model="item.heavy" id="box2" type="checkbox"/>
+                            <label for="box2">Отягчающие</label>
                         </div>
                     </div>
                 </div>
@@ -185,8 +190,13 @@
 
                             <label class="control-label">Пол <span class="required">*</span></label><br>
                             <div>
-                                <input ng-model="item.gender" type="radio" value='1' required> Мужской<br>
-                                <input ng-model="item.gender" type="radio" value='2'> Женский<br>
+                                <label class="radio-inline">
+                                    <input ng-model="item.gender" type="radio" value='1' required> Мужской<br>
+                                </label>
+                                <label class="radio-inline">
+                                    <input ng-model="item.gender" type="radio" value='2'> Женский<br>
+
+                                </label>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -239,10 +249,13 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="col-sm-12">
-                            <button onclick=" ym(53897173, 'reachGoal', 'zapros');" ng-show="showSendBtn" ng-click="sendRequest(item, singleDemo, selectedStage)" class="btn btn-lg btn-primary">
+                            <button onclick=" ym(53897173, 'reachGoal', 'zapros');" ng-show="showSendBtn"
+                                    ng-click="sendRequest(item, singleDemo, selectedStage)"
+                                    class="btn btn-lg btn-primary">
                                 Связаться
                             </button>
-                            <button ng-disabled="!item" class="btn btn-lg btn-danger" ng-click="clearForm(item, singleDemo)">
+                            <button ng-disabled="!item" class="btn btn-lg btn-danger"
+                                    ng-click="clearForm(item, singleDemo)">
                                 Очистить форму
                             </button>
                         </div>
@@ -276,10 +289,63 @@
                 {{typeMessage.error_message}}
             </div>
 
-            <div ng-if="typeMessage.result">
-                <!--<span ng-bind-html="typeMessage.result">{{typeMessage.result}}</span>-->
+            <!--<div ng-if="typeMessage.result">
+                &lt;!&ndash;<span ng-bind-html="typeMessage.result">{{typeMessage.result}}</span>&ndash;&gt;
                 <span ng-bind-html="typeMessage.result | trusted"></span>
+            </div>-->
+
+
+            <!--            New Design-->
+
+            <ul>
+                <li><a href="#home">Требования УК</a></li>
+                <li><a href="#news">Анализ Данных</a></li>
+                <li><a href="#contact">Мера Наказания</a></li>
+                <li><a href="#about">Рекомендации</a></li>
+                <li><a href="#links">Ссылки</a></li>
+            </ul>
+            <!--            New Design-->
+
+            <br>
+
+            <div class="penal-code">
+                <h3>Требования уголовного кодекса</h3>
+                <p>Размер наказания по статье 99 ч.2 Уголовного кодекса РК</p>
+                <div style="background: #CCCCCC; padding: 7px">
+                    <span>лишение свободы от 15 до 20 лет либо пожизненное лишение свободы, с конфиксацией имущества или без таковой</span>
+                </div>
             </div>
+            <br>
+
+            <div class="backAnalysis row">
+                <div class="analysis">
+                    <h3>Анализ данных</h3>
+                    <p>Анализ поступивших данных показал:
+                        Лицу, при указанных обстоятельствах, могут быть назначены следующие виды и сроки наказаний:</p>
+
+                    <div class="col-sm-12" style="padding: 0 0 15px">
+                        <div class="col-sm-6" style="padding: 0 15px">
+                            <h4 style="font-weight: 800">Основная мера наказания</h4>
+                            <div class="zx">Лишение свободы на срок 15 лет</div><br>
+                        </div>
+                        <div class="col-sm-6" style="background: #ffffff; padding: 0 15px">
+                            <h4 style="font-weight: 800">Дополнительная мера наказания</h4>
+                            <p>Конфискация имущества может быть назначена при наличии имущества добытого преступным путем, либо приобретенного на средства, добытые преступным путем</p>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+            </div>
+
+            <br>
+
+            <div class="recommend">
+                <h3>Рекомендации</h3>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+            </div>
+            <br>
 
             <!--<button ng-if="typeMessage.result" ng-click="showChart(item)" type="button" class="btn btn-primary">Показать аналитику</button>-->
             <button ng-if="typeMessage.result" ng-click="lineChart(item)" type="button" class="btn btn-primary">Показать

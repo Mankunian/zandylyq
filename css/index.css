@@ -1,4 +1,5 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans';
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 body {
     overflow: auto;
@@ -48,7 +49,7 @@ img.logo {
     padding: 5px 20px;
     border-radius: 5px;
     margin: 20px auto 40px auto !important;
-    background-color: rgb(4,4,4,0.8);
+    background-color: rgb(4, 4, 4, 0.9);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -104,6 +105,41 @@ label {
     height: 10px;
     width: 150px;
 }
+
+
+/*** custom checkboxes ***/
+
+input[type=checkbox] {
+    display: none;
+}
+
+/* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+}
+
+input[type=checkbox] + label:before {
+    content: "\f096";
+}
+
+/* unchecked icon */
+input[type=checkbox] + label:before {
+    letter-spacing: 10px;
+}
+
+/* space between checkbox and label */
+
+input[type=checkbox]:checked + label:before {
+    content: "\f046";
+}
+
+/* checked icon */
+input[type=checkbox]:checked + label:before {
+    letter-spacing: 5px;
+}
+
+/* allow space for check mark */
 
 
 /*Preloader*/
@@ -262,4 +298,104 @@ label {
     font-style: italic;
     font-weight: 600;
     font-size: small;
+}
+
+
+/*Modal windows style*/
+
+
+.modal-header {
+    background: #262626;
+    border: #262626;
+    color: #F0AE24;
+}
+
+.close {
+    color: #F0AE24;
+    opacity: 1;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+    text-transform: uppercase;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111111;
+    text-decoration: none;
+    color: #F0AE24;
+}
+
+.penal-code {
+    border-left: 8px solid #F0AE24;
+    padding: 0 15px;
+}
+
+
+.penal-code h3 {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: sans-serif;
+}
+
+.penal-code span {
+    font-weight: 800;
+    font-size: medium;
+}
+
+.analysis h3{
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: sans-serif;
+}
+
+.analysis{
+    /*border-left: 8px solid white;*/
+    padding: 0 15px;
+}
+
+.backAnalysis{
+    background: #EEA200;
+}
+
+.zx{
+    border-left: 8px solid #ffffff;
+    padding: 0 15px;
+    font-weight: 600;
+}
+
+#triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-left: 100px solid red;
+    border-bottom: 50px solid transparent;
+}
+
+.recommend{
+    border-left: 8px solid #F0AE24;
+    padding: 0 15px;
+}
+
+.recommend h3{
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: sans-serif;
 }
