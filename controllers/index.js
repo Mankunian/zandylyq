@@ -487,9 +487,9 @@ var modalContent = function ($scope, $uibModalInstance, $http, value, article, s
 
             zingchart.render({
                 id: 'myChart',
-                data: myConfig
-                // height: 500,
-                // width: 600
+                data: myConfig,
+                height: 447,
+                width: 810
             });
 
 
