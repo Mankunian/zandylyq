@@ -507,10 +507,10 @@ tbody tr{
 .example-2 .btn-tertiary {
     color: #fff;
     padding: 0;
-    line-height: 40px;
+    line-height: 75px;
     margin: auto;
     display: block;
-    border: 2px solid #fff
+    border: 2px dashed #f4f4f4
 }
 
 .example-2 .btn-tertiary:hover, .example-2 .btn-tertiary:focus {
@@ -529,6 +529,7 @@ tbody tr{
 
 .example-2 .input-file + .js-labelFile {
     overflow: hidden;
+    font-size: large;
     text-overflow: ellipsis;
     white-space: nowrap;
     padding: 0 10px;
