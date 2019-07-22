@@ -21,7 +21,7 @@
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/ui-bootstrap.js"></script>
     <script src="controllers/index.js"></script>
-    <script src="controllers/test.js"></script>
+    <script src="controllers/civil.js"></script>
     <script src="Scripts/jquery-2.2.1.js"></script>
 
     <script src="Scripts/angular-sanitize.js"></script>
@@ -95,7 +95,7 @@
 
 
 </head>
-<body ng-controller="mainCtrl">
+<body ng-controller="civilCtrl">
 <!--
 <nav class="navbar navbar-default" role="navigation">
     &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;
@@ -166,10 +166,10 @@
                         <div class="col-sm-12">
                             <div class="col-sm-6">
                                 <label class="control-label">ВАШЕ ФИО <span class="required">*</span></label>
-                                <input type="text" class="form-control" placeholder="Имя">
+                                <input ng-model="item.name" type="text" class="form-control" placeholder="Имя">
                             </div>
                             <div class="col-sm-6" style="margin: 27px 0">
-                                <input type="text" class="form-control" placeholder="Фамилия">
+                                <input ng-model="item.secondName" type="text" class="form-control" placeholder="Фамилия">
                             </div>
                         </div>
                     </div>
@@ -177,11 +177,11 @@
                         <div class="col-sm-12">
                             <div class="col-sm-6">
                                 <label class="control-label">Email <span class="required">*</span></label>
-                                <input type="email" class="form-control">
+                                <input ng-model="item.mail" type="email" class="form-control">
                             </div>
                             <div class="col-sm-6">
                                 <label class="control-label">Телефон </label>
-                                <input type="text" class="form-control" placeholder="77*********">
+                                <input ng-model="item.phone" type="text" class="form-control" placeholder="77*********">
                             </div>
                         </div>
                     </div>
@@ -211,8 +211,8 @@
                                 </div>-->
                                 <div class="example-2">
                                     <div class="form-group">
-                                        <input type="file" name="file" id="file" class="input-file">
-                                        <label for="file" class="btn btn-tertiary js-labelFile">
+                                        <input ng-model="item.file" type="file" name="file" id="fileSelect" class="input-file">
+                                        <label for="fileSelect" class="btn btn-tertiary js-labelFile">
                                             <i class="icon fa fa-check"></i>
                                             <span class="js-fileName">Загрузить файл</span>
                                         </label>
@@ -226,7 +226,7 @@
                         <div class="col-sm-12">
                             <div class="col-sm-12">
                                 <label class="control-label">Сообщите почему Вы не согласны с решением<span class="required">*</span> </label>
-                                <textarea style="width: 100%; border-radius: 4px" cols="5" rows="5"></textarea>
+                                <textarea ng-model="item.text" style="width: 100%; border-radius: 4px" cols="5" rows="5"></textarea>
                             </div>
                         </div>
                     </div>
@@ -234,7 +234,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="col-sm-12 text-center">
-                                <button type="button" class="btn btn-lg btn-success">Отправить</button>
+                                <button ng-click="sendBtn(item)" type="button" class="btn btn-lg btn-success">Отправить</button>
                             </div>
                         </div>
                     </div>
