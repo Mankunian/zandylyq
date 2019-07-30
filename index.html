@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Уголовное дело</title>
+    <title>Проверка приговора | Defense</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -289,22 +289,22 @@
                 {{typeMessage.error_message}}
             </div>
 
-            <!--<div ng-if="typeMessage.result">
-                &lt;!&ndash;<span ng-bind-html="typeMessage.result">{{typeMessage.result}}</span>&ndash;&gt;
+            <div ng-if="typeMessage.result">
+                <!--<span ng-bind-html="typeMessage.result">{{typeMessage.result}}</span>-->
                 <span ng-bind-html="typeMessage.result | trusted"></span>
-            </div>-->
+            </div>
 
 
             <!--            New Design-->
 
-            <ul>
+            <!--<ul>
                 <li><a href="#home">Требования УК</a></li>
                 <li><a href="#news">Анализ Данных</a></li>
                 <li><a href="#contact">Мера Наказания</a></li>
                 <li><a href="#about">Рекомендации</a></li>
                 <li><a href="#links">Ссылки</a></li>
             </ul>
-            <!--            New Design-->
+
 
             <br>
 
@@ -356,9 +356,15 @@
                 <h3>Ссылки</h3>
                 <a href="#">См: Нормативное постановление Верховного Суда Республики Казахстан от 8 декабря 2017 года № 11 "О некоторых вопросах судебной практики по применению законодательства террористических и экстремистских преступлениях"</a>
             </div>
-            <br>
+            <br>-->
+
+
+            <!--            New Design-->
+
+
             <!--<button ng-if="typeMessage.result" ng-click="showChart(item)" type="button" class="btn btn-primary">Показать аналитику</button>-->
-            <button ng-if="typeMessage.result" ng-click="lineChart(item)" type="button" class="btn btn-primary btnAnalytic">Показать
+            <button ng-if="typeMessage.result" ng-click="lineChart(item)" type="button"
+                    class="btn btn-primary btnAnalytic">Показать
                 аналитику
             </button>
             <br>
@@ -371,7 +377,7 @@
             <!--<div style="margin: 10px 0" ng-if="!noData" id='pieChart'></div>-->
             <br>
             <div class="col-sm-12 screen" ng-if="data">
-                <div style="margin: 35px 22px"  id='myChart'></div>
+                <div style="margin: 35px 22px" id='myChart'></div>
             </div>
 
 
@@ -381,10 +387,10 @@
 
 
             <div ng-show="showTable" class="panel panel-primary filterable">
-               <!-- <div class="panel-heading">
-                    <h3 class="panel-title">Список дел</h3>
-                    <div class="pull-right"></div>
-                </div>-->
+                <!-- <div class="panel-heading">
+                     <h3 class="panel-title">Список дел</h3>
+                     <div class="pull-right"></div>
+                 </div>-->
                 <table class="table">
                     <thead>
                     <tr class="filters">
@@ -405,8 +411,16 @@
                     <tr ng-repeat="item in tableData">
                         <td>{{item.numUD}}</td>
                         <td>
-                            <div ng-click="downloadFile(item)"><a href="{{item.file_url}}">{{item.Family}} {{item.Name}}
-                                {{item.LName}}</a></div>
+                            <div ng-click="downloadFile(item)">
+                                <a ng-if="item.file_url" href="{{item.file_url}}">{{item.Family}} {{item.Name}}
+                                    {{item.LName}}
+                                </a>
+
+
+
+                                <p ng-if="!item.file_url">{{item.Family}} {{item.Name}}
+                                    {{item.LName}}</p>
+                            </div>
                         </td>
                         <td>{{item.dRes}}</td>
                         <td>{{item.nSud}}</td>
