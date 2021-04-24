@@ -14,8 +14,8 @@ angular.module('app').config(function ($routeProvider) {
         .when("/controllers/index", {
             templateUrl: "index.html"
         })
-        .when("/controllers/test", {
-            templateUrl: "test.html"
+        .when("/controllers/civil", {
+            templateUrl: "civil.html"
         })
 
         .otherwise({redirectTo: '/'});
